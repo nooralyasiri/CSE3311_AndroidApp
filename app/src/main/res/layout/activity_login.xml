@@ -82,7 +82,9 @@
         android:text="CAST"
         android:textColor="#197278"
         android:textSize="50sp"
-        tools:layout_editor_absoluteX="227dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.79"
+        app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="199dp" />
 
     <TextView
@@ -111,10 +113,12 @@
         android:id="@+id/imageView"
         android:layout_width="290dp"
         android:layout_height="255dp"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.164"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/transparent_logo"
-        tools:layout_editor_absoluteY="11dp" />
+        tools:layout_editor_absoluteY="2dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="409dp"

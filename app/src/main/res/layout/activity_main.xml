@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+
     <TextView
         android:id="@+id/logo"
         android:layout_width="100dp"
@@ -86,6 +88,8 @@
         android:text="Create new account"
         android:textColor="@color/black"
         android:layout_centerHorizontal="true"/>
+
+
 
 
 </RelativeLayout>
