@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    Button LOGIN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        LOGIN = findViewById(R.id.loginbutton);
+        LOGIN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent downloadIntent = new Intent(getApplicationContext(), Login.class);
+                startService(downloadIntent);
+                startActivity(new Intent(MainActivity.this, Login.class));
+            }
+        });
     }
+
 }
