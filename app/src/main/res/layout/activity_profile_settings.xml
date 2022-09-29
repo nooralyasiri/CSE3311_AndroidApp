@@ -25,8 +25,8 @@
 
             <ImageView
                 android:id="@+id/editProfileBackBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="25dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -52,8 +52,10 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,21 +63,24 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/editProfPicImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
                     android:layout_marginTop="30dp"
+                    android:background="@drawable/circle"
+                    android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/Circular"
                     tools:src="@tools:sample/avatars" />
 
                 <TextView
@@ -84,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="change photo..."
-                    android:textColor="@color/gray"
+                    android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="normal"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -95,18 +100,21 @@
                     android:id="@+id/editFnameLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:text="First Name"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@+id/editFnameTextField"
                     app:layout_constraintEnd_toStartOf="@+id/editFnameTextField"
-                    app:layout_constraintTop_toTopOf="@+id/editFnameTextField" />
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/editFnameTextField"
+                    app:layout_constraintVertical_bias="0.5" />
 
                 <EditText
                     android:id="@+id/editFnameTextField"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="30dp"
                     android:background="@drawable/round_style"
                     android:backgroundTint="@color/dark_gray"
@@ -117,20 +125,19 @@
                     android:text="set first name..."
                     android:textColor="@color/gray"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.75"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/editFnameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/editProfPicLabel" />
 
                 <TextView
                     android:id="@+id/editLnameLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:text="Last Name"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@+id/editLnameTextField"
-                    app:layout_constraintEnd_toStartOf="@+id/editLnameTextField"
+                    app:layout_constraintEnd_toEndOf="@+id/editFnameLabel"
+                    app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintTop_toTopOf="@+id/editLnameTextField" />
 
                 <EditText
@@ -147,6 +154,8 @@
                     android:text="set last name..."
                     android:textColor="@color/gray"
                     app:layout_constraintEnd_toEndOf="@+id/editFnameTextField"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/editFnameTextField"
                     app:layout_constraintTop_toBottomOf="@+id/editFnameTextField" />
 
                 <EditText
@@ -163,18 +172,20 @@
                     android:text="set display name..."
                     android:textColor="@color/gray"
                     app:layout_constraintEnd_toEndOf="@+id/editLnameTextField"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/editLnameTextField"
                     app:layout_constraintTop_toBottomOf="@+id/editLnameTextField" />
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:text="Display Name"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
-                    app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName"
+                    app:layout_constraintEnd_toEndOf="@+id/editLnameLabel"
+                    app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName" />
 
                 <EditText
@@ -191,50 +202,58 @@
                     android:text="set bio message..."
                     android:textColor="@color/gray"
                     app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
                     app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:text="Bio Message"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName2"
-                    app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName2"
+                    app:layout_constraintEnd_toEndOf="@+id/textView"
                     app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName2" />
-
-                <Button
-                    android:id="@+id/button10"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
-                    android:backgroundTint="@color/secondary"
-                    android:text="Log Out"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/button11"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2"
-                    app:layout_constraintVertical_bias="1.0" />
-
-                <Button
-                    android:id="@+id/button11"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
-                    android:backgroundTint="@color/secondary"
-                    android:text="Save"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/button10"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
     </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/dark_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView">
+
+        <Button
+            android:id="@+id/button10"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/light_red"
+            android:text="Log Out"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button11"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button11"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/secondary"
+            android:text="Save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button10"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
