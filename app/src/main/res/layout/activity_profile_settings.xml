@@ -24,7 +24,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/editProfileBackBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
@@ -34,7 +34,7 @@
                 app:srcCompat="@drawable/arrow_back" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/editProfileTitleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
@@ -66,58 +66,174 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/editProfPicImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="30dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:src="@tools:sample/avatars" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/editProfPicLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="Change photo..."
-                    android:textColor="@color/white"
+                    android:text="change photo..."
+                    android:textColor="@color/gray"
                     android:textSize="16sp"
                     android:textStyle="normal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                    app:layout_constraintTop_toBottomOf="@+id/editProfPicImage" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/editFnameLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:text="First Name"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName2"
-                    app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName2"
-                    app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName2" />
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/editFnameTextField"
+                    app:layout_constraintEnd_toStartOf="@+id/editFnameTextField"
+                    app:layout_constraintTop_toTopOf="@+id/editFnameTextField" />
+
+                <EditText
+                    android:id="@+id/editFnameTextField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/round_style"
+                    android:backgroundTint="@color/dark_gray"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    android:padding="12dp"
+                    android:text="set first name..."
+                    android:textColor="@color/gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.75"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editProfPicLabel" />
+
+                <TextView
+                    android:id="@+id/editLnameLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="Last Name"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/editLnameTextField"
+                    app:layout_constraintEnd_toStartOf="@+id/editLnameTextField"
+                    app:layout_constraintTop_toTopOf="@+id/editLnameTextField" />
+
+                <EditText
+                    android:id="@+id/editLnameTextField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/round_style"
+                    android:backgroundTint="@color/dark_gray"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    android:padding="12dp"
+                    android:text="set last name..."
+                    android:textColor="@color/gray"
+                    app:layout_constraintEnd_toEndOf="@+id/editFnameTextField"
+                    app:layout_constraintTop_toBottomOf="@+id/editFnameTextField" />
+
+                <EditText
+                    android:id="@+id/editTextTextPersonName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/round_style"
+                    android:backgroundTint="@color/dark_gray"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    android:padding="12dp"
+                    android:text="set display name..."
+                    android:textColor="@color/gray"
+                    app:layout_constraintEnd_toEndOf="@+id/editLnameTextField"
+                    app:layout_constraintTop_toBottomOf="@+id/editLnameTextField" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="Display Name"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
+                    app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName"
+                    app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName" />
 
                 <EditText
                     android:id="@+id/editTextTextPersonName2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/round_style"
+                    android:backgroundTint="@color/dark_gray"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
-                    android:text="First Name..."
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.706"
+                    android:padding="12dp"
+                    android:text="set bio message..."
+                    android:textColor="@color/gray"
+                    app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="Bio Message"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName2"
+                    app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName2"
+                    app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName2" />
+
+                <Button
+                    android:id="@+id/button10"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:backgroundTint="@color/secondary"
+                    android:text="Log Out"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/button11"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <Button
+                    android:id="@+id/button11"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:backgroundTint="@color/secondary"
+                    android:text="Save"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/button10"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
     </ScrollView>
 
