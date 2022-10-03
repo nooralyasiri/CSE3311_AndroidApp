@@ -75,7 +75,6 @@
                     android:layout_width="128dp"
                     android:layout_height="128dp"
                     android:layout_marginTop="30dp"
-                    android:background="@drawable/circle"
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -110,7 +109,7 @@
                     app:layout_constraintTop_toTopOf="@+id/editFnameTextField"
                     app:layout_constraintVertical_bias="0.5" />
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editFnameTextField"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -122,8 +121,9 @@
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
                     android:padding="12dp"
-                    android:text="set first name..."
-                    android:textColor="@color/gray"
+                    android:textColor="@color/white"
+                    android:hint="set first name..."
+                    android:textColorHint="@color/gray"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/editFnameLabel"
                     app:layout_constraintTop_toBottomOf="@+id/editProfPicLabel" />
@@ -140,7 +140,7 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintTop_toTopOf="@+id/editLnameTextField" />
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editLnameTextField"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -151,14 +151,15 @@
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
                     android:padding="12dp"
-                    android:text="set last name..."
-                    android:textColor="@color/gray"
+                    android:textColor="@color/white"
+                    android:hint="set last name..."
+                    android:textColorHint="@color/gray"
                     app:layout_constraintEnd_toEndOf="@+id/editFnameTextField"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="@+id/editFnameTextField"
                     app:layout_constraintTop_toBottomOf="@+id/editFnameTextField" />
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextTextPersonName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -169,8 +170,9 @@
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
                     android:padding="12dp"
-                    android:text="set display name..."
-                    android:textColor="@color/gray"
+                    android:textColor="@color/white"
+                    android:hint="set display name..."
+                    android:textColorHint="@color/gray"
                     app:layout_constraintEnd_toEndOf="@+id/editLnameTextField"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="@+id/editLnameTextField"
@@ -188,7 +190,7 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName" />
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextTextPersonName2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -199,8 +201,9 @@
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
                     android:padding="12dp"
-                    android:text="set bio message..."
-                    android:textColor="@color/gray"
+                    android:textColor="@color/white"
+                    android:hint="set bio message..."
+                    android:textColorHint="@color/gray"
                     app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
                     app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
                     app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
