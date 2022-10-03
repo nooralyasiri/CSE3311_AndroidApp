@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "589265182359",
+    "project_id": "couchcast-5e7f8",
+    "storage_bucket": "couchcast-5e7f8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:589265182359:android:8a6dc33513f26da6ca13d2",
+        "android_client_info": {
+          "package_name": "com.vkevvinn.couchcast"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "589265182359-rsvoj6fpliatf4grpaunf9k7lnec5pqu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiub_nrx3gGc6y8940G6KSzWSF1-OcMGs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "589265182359-rsvoj6fpliatf4grpaunf9k7lnec5pqu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
