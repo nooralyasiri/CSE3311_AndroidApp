@@ -1,95 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-
-
-    <TextView
-        android:id="@+id/logo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:text="CouchCast"
-        android:textStyle="bold"
-        android:elegantTextHeight="true"
-        android:textAlignment="center"
-        android:background="@drawable/logo" />
-
-    <TextView
-        android:id="@+id/signintext"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/logo"
-        android:gravity="center"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="10dp"
-        android:text="Sign in"
-        android:elegantTextHeight="true"
-        android:textColor="@color/black"
-        android:textSize="14dp" />
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/signintext"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
-        android:background="#30000000"
-        android:hint="Username"
-        android:minHeight="40dp"
-        android:padding="10dp"
-        android:textSize="15dp" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/username"
-        android:layout_centerHorizontal="true"
-        android:background="#30000000"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:minHeight="40dp"
-        android:padding="10dp"
-        android:textSize="15dp" />
 
     <Button
-        android:id="@+id/loginbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/password"
+        android:id="@+id/enterButton"
+        android:layout_width="353dp"
+        android:layout_height="46dp"
+        android:background="@drawable/rounded_button"
+        android:text="WELCOME TO COUCHCAST"
+        android:textSize="17sp"
+        app:backgroundTint="#197278"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.624" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="290dp"
+        android:layout_height="255dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:text="Login" />
-
-    <TextView
-        android:id="@+id/forgotpw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/loginbutton"
-        android:text="Forgot password?"
-        android:textColor="@color/black"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="3dp"/>
-
-    <TextView
-        android:id="@+id/createuser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/forgotpw"
-        android:text="Create new account"
-        android:textColor="@color/black"
-        android:layout_centerHorizontal="true"/>
+        android:layout_marginStart="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.164"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.348"
+        app:srcCompat="@drawable/transparent_logo" />
 
 
-
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
