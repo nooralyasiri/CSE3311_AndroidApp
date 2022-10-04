@@ -18,4 +18,10 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="todo">TODO</string>
     <string name="profile_settings">Profile Settings</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_nav_bar">NavBarActivity</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
