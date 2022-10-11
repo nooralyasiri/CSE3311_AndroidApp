@@ -43,13 +43,17 @@ public class Registration extends AppCompatActivity {
                 TextView emailConfirm = findViewById(R.id.emailConfirm);
                 if( email.getText().toString().equals(emailConfirm.getText().toString()) )
                 {
+                    TextView userName = findViewById(R.id.usernameNew);
+                    TextView firstName = findViewById(R.id.firstName);
+                    TextView lastName = findViewById(R.id.lastName);
+                    TextView passsword = findViewById(R.id.passNew);
                     Map<String, Object> userInfo = new HashMap<>();
-                    userInfo.put("userName", findViewById(R.id.usernameNew).toString());
-                    userInfo.put("firstName", findViewById(R.id.firstName).toString());
-                    userInfo.put("lastName", findViewById(R.id.lastName).toString());
-                    userInfo.put("email", findViewById(R.id.email).toString());
+                    userInfo.put("userName", userName.getText().toString());
+                    userInfo.put("firstName", firstName.getText().toString());
+                    userInfo.put("lastName", lastName.getText().toString());
+                    userInfo.put("email", email.getText().toString());
                     userInfo.put("createTime", String.valueOf(System.currentTimeMillis()));
-                    userInfo.put("hashedPassword", PasswordWrapper.hashPassword(findViewById(R.id.passNew).toString(), String.valueOf(userInfo.get("createTime"))));
+                    userInfo.put("hashedPassword", PasswordWrapper.hashPassword(passsword.getText().toString(), String.valueOf(userInfo.get("createTime"))));
 
                     firestoreWrapper.addNewUser(userInfo);
                 }
