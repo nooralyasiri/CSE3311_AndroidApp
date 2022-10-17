@@ -3,6 +3,7 @@ package com.vkevvinn.couchcast;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,18 @@ public class Login extends AppCompatActivity {
                 Intent downloadIntent = new Intent(getApplicationContext(), Registration.class);
                 startService(downloadIntent);
                 startActivity(new Intent(Login.this, Registration.class));
+            }
+        });
+
+        Button loginButton;
+
+        loginButton = findViewById(R.id.loginbutton);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent downloadIntent = new Intent(getApplicationContext(), BotNavActivity.class);
+                startService(downloadIntent);
+                startActivity(new Intent(Login.this, BotNavActivity.class));
             }
         });
     }
