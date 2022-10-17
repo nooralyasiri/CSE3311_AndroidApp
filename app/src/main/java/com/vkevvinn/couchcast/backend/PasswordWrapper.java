@@ -7,10 +7,7 @@ import java.nio.charset.StandardCharsets;
 public class PasswordWrapper {
 
     public static boolean isValid(String password, String salt, String hashedPassword) {
-        String comparePassword = Hashing.sha256()
-                .hashString(password + salt, StandardCharsets.UTF_8)
-                .toString();
-        return comparePassword.equals(hashedPassword);
+        return hashedPassword.equals(hashPassword(password, salt));
     }
 
     public static String hashPassword(String password, String salt) {

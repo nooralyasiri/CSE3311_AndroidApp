@@ -1,13 +1,23 @@
 package com.vkevvinn.couchcast;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.vkevvinn.couchcast.backend.FirestoreWrapper;
 import com.vkevvinn.couchcast.backend.PasswordWrapper;
 
@@ -16,13 +26,23 @@ import java.util.Map;
 
 public class Registration extends AppCompatActivity {
 
+    FirestoreWrapper firestoreWrapper = new FirestoreWrapper();
+    TextView email;
+    TextView emailConfirm;
+    TextView password;
+    TextView passConfirm;
+    TextView userName;
+    TextView firstName;
+    TextView lastName;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
         TextView Login_Back;
-        FirestoreWrapper firestoreWrapper = new FirestoreWrapper();
 
 
         Login_Back = findViewById(R.id.loginReturn2);
@@ -39,25 +59,80 @@ public class Registration extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                TextView email = findViewById(R.id.email);
-                TextView emailConfirm = findViewById(R.id.emailConfirm);
-                if( email.getText().toString().equals(emailConfirm.getText().toString()) )
+                email = findViewById(R.id.email);
+                emailConfirm = findViewById(R.id.emailConfirm);
+                if( !TextUtils.isEmpty(email.getText().toString()) && email.getText().toString().equals(emailConfirm.getText().toString()) )
                 {
-                    TextView userName = findViewById(R.id.usernameNew);
-                    TextView firstName = findViewById(R.id.firstName);
-                    TextView lastName = findViewById(R.id.lastName);
-                    TextView passsword = findViewById(R.id.passNew);
-                    Map<String, Object> userInfo = new HashMap<>();
-                    userInfo.put("userName", userName.getText().toString());
-                    userInfo.put("firstName", firstName.getText().toString());
-                    userInfo.put("lastName", lastName.getText().toString());
-                    userInfo.put("email", email.getText().toString());
-                    userInfo.put("createTime", String.valueOf(System.currentTimeMillis()));
-                    userInfo.put("hashedPassword", PasswordWrapper.hashPassword(passsword.getText().toString(), String.valueOf(userInfo.get("createTime"))));
+                    password = findViewById(R.id.passNew);
+                    passConfirm = findViewById(R.id.passConfirm);
+                    if( !TextUtils.isEmpty(password.getText().toString()) && password.getText().toString().equals(passConfirm.getText().toString()) ) {
 
-                    firestoreWrapper.addNewUser(userInfo);
+                        userName = findViewById(R.id.usernameNew);
+                        getUserInfo();
+                    }
+
+                    else {
+                        password.setText("Password must not be empty and match!");
+                        passConfirm.setText("");
+                    }
+                }
+
+                else {
+                    email.setText("E-Mails must not be empty and match!");
+                    emailConfirm.setText("");
                 }
             }
         });
+    }
+
+    private void addNewUser() {
+        Map<String, Object> userInfoMap = new HashMap<>();
+
+        firstName = findViewById(R.id.firstName);
+        lastName = findViewById(R.id.lastName);
+        userInfoMap.put("userName", userName.getText().toString());
+        userInfoMap.put("firstName", firstName.getText().toString());
+        userInfoMap.put("lastName", lastName.getText().toString());
+        userInfoMap.put("email", email.getText().toString());
+        userInfoMap.put("createTime", String.valueOf(System.currentTimeMillis()));
+        userInfoMap.put("hashedPassword", PasswordWrapper.hashPassword(password.getText().toString(), String.valueOf(userInfoMap.get("createTime"))));
+
+        firestoreWrapper.addNewUser(userInfoMap)
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                    Intent loginScreen = new Intent(Registration.this, Login.class);
+                    startActivity(loginScreen);
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.w(TAG, "Error writing document", e);
+                    userName.setText(e.toString());
+                }
+            });
+    }
+
+    private void getUserInfo() {
+        firestoreWrapper.getUserInfo(userName.getText().toString())
+            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        if( task.getResult().exists() ) {
+                            userName.setText("Username already in use!");
+                        }
+
+                        else {
+                            addNewUser();
+                        }
+
+                    } else {
+                        userName.setText("Please try again!");
+                    }
+                }
+            });
     }
 }
