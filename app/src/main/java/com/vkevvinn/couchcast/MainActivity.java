@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
         LOGIN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent downloadIntent = new Intent(getApplicationContext(), Login.class);
+                Intent downloadIntent = new Intent(getApplicationContext(), ShowInfo.class);
                 startService(downloadIntent);
-                startActivity(new Intent(MainActivity.this, Login.class));
+                startActivity(new Intent(MainActivity.this, ShowInfo.class));
             }
         });
     }
