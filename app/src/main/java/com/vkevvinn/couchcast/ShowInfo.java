@@ -1,6 +1,7 @@
 package com.vkevvinn.couchcast;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,39 +11,72 @@ import androidx.appcompat.app.AppCompatActivity;
 //tmdb imports needed for methods
 import info.movito.themoviedbapi.TmdbApi;
 import info.movito.themoviedbapi.TmdbTV;
+import info.movito.themoviedbapi.model.tv.Network;
+import info.movito.themoviedbapi.model.tv.TvSeries;
 
 
 public class ShowInfo extends AppCompatActivity {
-    //i can't tell what kind of method to use here i think that is what is causing the problems
-    //when i use just onCreate nothing changes
 
-    //i also tried following this issue https://github.com/holgerbrandl/themoviedbapi/issues/69
-    //they say to use AsyncTask but I was unsuccessful there too :(
-
-    //i do believe that i am using the correct themoviedbapi method to get the show name tho!
+    TextView showName, showSeasons, showStreamingProviders;
+    String apiKey = "4bb376189becc0b82f734fd11af958a0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ShowInfoExecutor showInfoExecutor = new ShowInfoExecutor();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_info);
 
-        //creating variables
-        TextView showName, showSeasons;
-        String name;
+        showName = findViewById(R.id.showName);
+        showSeasons = findViewById(R.id.showSeasons);
+        showStreamingProviders = findViewById(R.id.showStreamingProviders);
 
-        String apiKey = "4bb376189becc0b82f734fd11af958a0";
-
-    //start having issues after trying to include TmdbApi stuff
-
-//        TmdbTV tv = new TmdbApi(apiKey).getTvSeries();
-
-//        showName = findViewById(R.id.showName);
-//        name = tv.getSeries(1396,"en").getOriginalName();
-//        showName.setText(name);
-
-//        Log.e("SHOW NAME", name);
+        try {
+            showInfoExecutor.execute(1396);
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
+    private void setShowInfo(String apiKey) {
+        String show;
+        runOnUiThread( new Runnable() {
+            @Override
+            public void run() {
+                TmdbApi tmdbApi = new TmdbApi(apiKey);
+                TmdbTV tv = tmdbApi.getTvSeries();
+
+                showName.setText(tv.getSeries(1396, "en").getOriginalName());
+            }
+        });
+    }
+
+    private class ShowInfoExecutor extends AsyncTask<Integer, String, TvSeries> {
+
+        String platforms = "Streaming on: ";
+
+        @Override
+        protected TvSeries doInBackground(Integer... integers) {
+            TmdbApi tmdbApi = new TmdbApi(apiKey);
+            TmdbTV tv = tmdbApi.getTvSeries();
+            return tv.getSeries(integers[0], "en");
+        }
+
+        @Override
+        protected void onPostExecute(TvSeries tvSeries) {
+            showName.setText(tvSeries.getOriginalName());
+            showSeasons.setText(tvSeries.getNumberOfSeasons() + " Seasons");
+            for( Network network : tvSeries.getNetworks()) {
+                platforms += (network.getName() + " ");
+            }
+            showStreamingProviders.setText(platforms);
+        }
+
+        @Override
+        protected void onProgressUpdate(String... strings) {
+            return;
+        }
+    }
 
 }
