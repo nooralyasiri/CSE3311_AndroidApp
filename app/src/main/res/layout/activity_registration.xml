@@ -199,5 +199,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.953" />
 
+    <ImageView
+        android:id="@+id/welcome"
+        android:layout_width="351dp"
+        android:layout_height="135dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/welcome" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
