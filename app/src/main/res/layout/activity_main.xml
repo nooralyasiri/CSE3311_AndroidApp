@@ -6,34 +6,13 @@
         android:layout_height="match_parent">
 
 
-    <Button
-        android:id="@+id/enterButton"
-        android:layout_width="353dp"
-        android:layout_height="46dp"
-        android:background="@drawable/rounded_button"
-        android:text="WELCOME TO COUCHCAST"
-        android:textSize="17sp"
-        app:backgroundTint="#197278"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.624" />
-
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="290dp"
-        android:layout_height="255dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="48dp"
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.164"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.348"
-        app:srcCompat="@drawable/transparent_logo" />
-
-
+        app:srcCompat="@drawable/splashscreen" />
 </androidx.constraintlayout.widget.ConstraintLayout>

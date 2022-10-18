@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.os.Handler;
+
 
 public class MainActivity extends AppCompatActivity {
     Button LOGIN;
@@ -19,16 +21,23 @@ public class MainActivity extends AppCompatActivity {
         //creating variables
         TextView forgotpw, createuser;
         Button enterButton;
+        new Handler().postDelayed(new Runnable() {
 
-        LOGIN = findViewById(R.id.enterButton);
-        LOGIN.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
-                Intent downloadIntent = new Intent(getApplicationContext(), Login.class);
-                startService(downloadIntent);
-                startActivity(new Intent(MainActivity.this, Login.class));
+            public void run() {
+                // This method will be executed once the timer is over
+                Intent i = new Intent(MainActivity.this, Login.class);
+                startActivity(i);
+                finish();
             }
-        });
+        }, 5000);
+
+
+
+
+
+
     }
 
 }
