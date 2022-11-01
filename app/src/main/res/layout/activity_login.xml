@@ -39,6 +39,7 @@
         android:ems="10"
         android:gravity="center"
         android:hint="PASSWORD"
+
         android:inputType="textPassword"
         android:textColor="#283D3B"
         android:textColorHint="#283D3B"
