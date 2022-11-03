@@ -1,10 +1,7 @@
 package com.vkevvinn.couchcast;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -75,7 +72,6 @@ public class ShowInfo extends AppCompatActivity {
 
         @Override
         protected void onProgressUpdate(String... strings) {
-            return;
         }
     }
 
