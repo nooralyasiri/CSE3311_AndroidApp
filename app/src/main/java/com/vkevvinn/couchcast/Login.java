@@ -70,9 +70,11 @@ public class Login extends AppCompatActivity {
                                     && PasswordWrapper.isValid(passwordNoHash.getText().toString(),
                                     docSnapshot.get("createTime").toString(),
                                     docSnapshot.get("hashedPassword").toString())) {
-                                //Transition to home screen as this user once implemented
-                                userName.setText("Successfully logged in!");
-                                passwordNoHash.setText("");
+                                Intent downloadIntent = new Intent(getApplicationContext(), BotNavActivity.class);
+                                startService(downloadIntent);
+                                startActivity(new Intent(Login.this, BotNavActivity.class));
+//                                userName.setText("Successfully logged in!");
+//                                passwordNoHash.setText("");
                             }
                         }
 

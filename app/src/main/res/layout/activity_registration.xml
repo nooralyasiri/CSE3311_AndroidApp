@@ -50,35 +50,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.236" />
 
-    <TextView
-        android:id="@+id/welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="WELCOME TO"
-        android:textColor="#197278"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.022"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.137" />
-
-    <TextView
-        android:id="@+id/couch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="COUCHCAST"
-        android:textColor="#197278"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.969"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.137" />
-
     <EditText
         android:id="@+id/email"
         android:layout_width="353dp"
@@ -153,7 +124,7 @@
         android:ems="10"
         android:gravity="center"
         android:hint="PASSWORD"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:textColor="#283D3B"
         android:textColorHint="#283D3B"
         android:textSize="17sp"
@@ -174,7 +145,7 @@
         android:ems="10"
         android:gravity="center"
         android:hint="CONFIRM PASSWORD"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:textColor="#283D3B"
         android:textColorHint="#283D3B"
         android:textSize="17sp"
@@ -227,6 +198,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.953" />
+
+    <ImageView
+        android:id="@+id/welcome"
+        android:layout_width="351dp"
+        android:layout_height="135dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/welcome" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
