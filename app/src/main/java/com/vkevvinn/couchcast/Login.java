@@ -29,7 +29,6 @@ public class Login extends AppCompatActivity {
 
         TextView NEW_ACCOUNT;
 
-
         NEW_ACCOUNT = findViewById(R.id.textView5);
         NEW_ACCOUNT.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +38,7 @@ public class Login extends AppCompatActivity {
                 startActivity(new Intent(Login.this, Registration.class));
             }
         });
+
 
         Button loginButton = findViewById(R.id.loginbutton);
         loginButton.setOnClickListener(new View.OnClickListener(){
