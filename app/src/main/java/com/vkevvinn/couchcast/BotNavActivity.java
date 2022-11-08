@@ -18,7 +18,7 @@ public class BotNavActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityBotNavBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new ProfileFragment());
+        replaceFragment(new HomeFragment());
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
