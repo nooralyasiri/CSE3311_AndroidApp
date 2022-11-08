@@ -6,6 +6,18 @@
     android:layout_height="match_parent">
 
 
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WELCOME!"
+        android:textColor="@color/purple_500"
+        android:textSize="72dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="49dp" />
+
     <EditText
         android:id="@+id/firstName"
         android:layout_width="165dp"
@@ -198,16 +210,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.953" />
-
-    <ImageView
-        android:id="@+id/welcome"
-        android:layout_width="351dp"
-        android:layout_height="135dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/welcome" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
