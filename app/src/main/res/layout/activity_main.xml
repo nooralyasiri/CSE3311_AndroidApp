@@ -7,7 +7,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/whiteCover"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -15,4 +15,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/splashscreen" />
+
+    <TextView
+        android:id="@+id/couch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text="COUCH"
+        android:textColor="@color/purple_500"
+        android:textSize="60dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="275dp" />
+
+    <TextView
+        android:id="@+id/cast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:text="CAST"
+        android:textColor="@color/purple_500"
+        android:textSize="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="275dp" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
