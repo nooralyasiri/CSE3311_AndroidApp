@@ -118,7 +118,7 @@
                     android:id="@+id/trendOne"
                     android:layout_width="83dp"
                     android:layout_height="143dp"
-                    android:background="@drawable/tempcard"
+                    android:background="@android:color/transparent"
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     app:layout_constraintEnd_toStartOf="@+id/trendTwo"
@@ -129,7 +129,7 @@
                     android:id="@+id/trendTwo"
                     android:layout_width="83dp"
                     android:layout_height="143dp"
-                    android:background="@drawable/tempcard"
+                    android:background="@android:color/transparent"
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     app:layout_constraintBottom_toBottomOf="@+id/trendscreen"
@@ -142,7 +142,7 @@
                     android:id="@+id/trendThree"
                     android:layout_width="83dp"
                     android:layout_height="143dp"
-                    android:background="@drawable/tempcard"
+                    android:background="@android:color/transparent"
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     app:layout_constraintEnd_toEndOf="@+id/trendscreen"
@@ -197,6 +197,15 @@
                     android:textSize="15dp"
                     app:layout_constraintStart_toEndOf="@+id/smallercard_recent"
                     app:layout_constraintTop_toBottomOf="@+id/seasonCount" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/trending_rv"
+                    android:layout_width="352dp"
+                    android:layout_height="179dp"
+                    android:layout_marginStart="9dp"
+                    android:scrollbars="horizontal"
+                    app:layout_constraintStart_toStartOf="@+id/trendscreen"
+                    app:layout_constraintTop_toBottomOf="@+id/trending" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>

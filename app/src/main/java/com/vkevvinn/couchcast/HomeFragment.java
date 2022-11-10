@@ -3,17 +3,22 @@ package com.vkevvinn.couchcast;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapter.ItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,6 +28,11 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    ArrayList<String> showNames = new ArrayList<>();
+
+    RecyclerView trending_rv;
+    private ShowlistRecyclerViewAdapter adapter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -58,7 +68,27 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        showNames.add("Stranger Things");
+        showNames.add("Breaking Bad");
+        showNames.add("The 100");
+        showNames.add("Game of Thrones");
+
+        trending_rv = view.findViewById(R.id.trending_rv);
+        trending_rv.setHasFixedSize(true);
+        LinearLayoutManager trendingLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        trending_rv.setLayoutManager(trendingLayoutManager);
+        adapter = new ShowlistRecyclerViewAdapter(getActivity(), showNames);
+        adapter.setClickListener(this);
+        trending_rv.setAdapter(adapter);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return view;
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Toast.makeText(getActivity(), "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
     }
 }
