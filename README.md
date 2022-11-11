@@ -91,8 +91,6 @@ Use this space to show useful examples of how a project can be used. Additional 
 <!-- ROADMAP -->
 ## Roadmap
 
-!-- WILL BE ADDED AS THE PROJECT GOES ON
-
 - [ ] Authentication
   - [ ] Login
   - [ ] Registration
