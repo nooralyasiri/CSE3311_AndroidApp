@@ -87,7 +87,7 @@ public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapte
         trending_rv.setHasFixedSize(true);
         LinearLayoutManager trendingLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         trending_rv.setLayoutManager(trendingLayoutManager);
-        adapter = new ShowlistRecyclerViewAdapter(getActivity(), showNames, posterUrls);
+        adapter = new ShowlistRecyclerViewAdapter(getActivity(), showIds, showNames, posterUrls);
         adapter.setClickListener(this);
         trending_rv.setAdapter(adapter);
 
@@ -97,7 +97,7 @@ public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapte
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(getActivity(), "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "You clicked " + adapter.getName(position) + " (Show ID " + adapter.getId(position) + ") on item position " + position, Toast.LENGTH_SHORT).show();
     }
 
     private class GetTrendingShows extends AsyncTask<Void, Void, List<TvSeries>> {
@@ -105,7 +105,7 @@ public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapte
         @Override
         protected List<TvSeries> doInBackground(Void... voids) {
             TmdbApi tmdbApi = new TmdbApi(apiKey);
-            List<TvSeries> showQuery = tmdbApi.getTvSeries().getPopular("en-US",1).getResults();
+            List<TvSeries> showQuery = tmdbApi.getTvSeries().getPopular("en-US",0).getResults();
             return showQuery;
         }
 
@@ -138,17 +138,15 @@ public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapte
             try{
                 return Utils.createImageUrl(tmdbApi, posterPaths[0], "original").toString();
             } catch (Exception e) {
-                return "ERROR";
+                return "https://i.pinimg.com/236x/96/e2/c9/96e2c9bd131c8ae9bb2b88fff69f9579.jpg";
             }
         }
 
         @Override
         protected void onPostExecute(String imageUrl) {
-            if(!imageUrl.equals("ERROR")) {
-                Log.e("imageUrl: ", imageUrl.replaceAll("http", "https"));
-                posterUrls.add(imageUrl.replaceAll("http://", "https://"));
-                adapter.notifyDataSetChanged();
-            }
+            Log.e("imageUrl: ", imageUrl.replaceAll("http", "https"));
+            posterUrls.add(imageUrl.replaceAll("http://", "https://"));
+            adapter.notifyDataSetChanged();
         }
     }
 }
