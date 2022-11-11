@@ -17,14 +17,16 @@ import java.util.List;
 
 public class ShowlistRecyclerViewAdapter extends RecyclerView.Adapter<ShowlistRecyclerViewAdapter.ViewHolder> {
 
+    private List<Integer> showIds;
     private List<String> showNames;
     private List<String> posterUrls;
     private LayoutInflater inflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    ShowlistRecyclerViewAdapter(Context context, List<String> showNames, List<String> posterUrls) {
+    ShowlistRecyclerViewAdapter(Context context, List<Integer> showIds, List<String> showNames, List<String> posterUrls) {
         this.inflater = LayoutInflater.from(context);
+        this.showIds = showIds;
         this.showNames = showNames;
         this.posterUrls = posterUrls;
     }
@@ -73,8 +75,11 @@ public class ShowlistRecyclerViewAdapter extends RecyclerView.Adapter<ShowlistRe
         }
     }
     // convenience method for getting data at click position
-    public String getItem(int id) {
-        return showNames.get(id);
+    public String getName(int i) {
+        return showNames.get(i);
+    }
+    public Integer getId(int i) {
+        return showIds.get(i);
     }
 
     // allows clicks events to be caught
