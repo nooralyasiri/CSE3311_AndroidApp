@@ -93,10 +93,18 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 !-- WILL BE ADDED AS THE PROJECT GOES ON
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+- [ ] Authentication
+  - [ ] Login
+  - [ ] Registration
+- [ ] View Trending TV Shows
+- [ ] View TV Shows Recently Added to a List by the User
+- [ ] Search for TV Shows
+    - [ ] View TV Shows from Different Genres on the Same Screen
+    - [ ] Autofill Search 
+- [ ] Add TV Shows to a List (Favorites, Want to Watch)
+- [ ] Rate and Review TV Shows
+- [ ] Customize your Profile
+- [ ] Dark Mode/Light Mode
 
 
 
