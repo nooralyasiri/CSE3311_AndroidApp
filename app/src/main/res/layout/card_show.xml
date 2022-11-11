@@ -8,11 +8,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageView
-            android:src="@drawable/tempcard"
-            android:scaleType="centerCrop"
+            android:id="@+id/showcardimage"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/tempcard" />
 
         <TextView
             android:id="@+id/showcardtitle"
