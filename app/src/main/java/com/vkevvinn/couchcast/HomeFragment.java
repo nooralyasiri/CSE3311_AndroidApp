@@ -105,7 +105,7 @@ public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapte
         @Override
         protected List<TvSeries> doInBackground(Void... voids) {
             TmdbApi tmdbApi = new TmdbApi(apiKey);
-            List<TvSeries> showQuery = tmdbApi.getTvSeries().getPopular("en",0).getResults();
+            List<TvSeries> showQuery = tmdbApi.getTvSeries().getPopular("en-US",1).getResults();
             return showQuery;
         }
 
@@ -135,13 +135,13 @@ public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapte
         protected String doInBackground(String... posterPaths) {
             TmdbApi tmdbApi = new TmdbApi(apiKey);
             Utils utils = new Utils();
-            return Utils.createImageUrl(tmdbApi, posterPaths[0], "w500").toString();
+            return Utils.createImageUrl(tmdbApi, posterPaths[0], "original").toString();
         }
 
         @Override
         protected void onPostExecute(String imageUrl) {
             Log.e("imageUrl: ",imageUrl.replaceAll("http","https"));
-            posterUrls.add(imageUrl.replaceAll("http","https"));
+            posterUrls.add(imageUrl.replaceAll("http://","https://"));
             adapter.notifyDataSetChanged();
         }
     }
