@@ -1,17 +1,24 @@
 package com.vkevvinn.couchcast;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import info.movito.themoviedbapi.TmdbApi;
+import info.movito.themoviedbapi.Utils;
+import info.movito.themoviedbapi.model.tv.TvSeries;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,10 +36,13 @@ public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapte
     private String mParam1;
     private String mParam2;
 
-    ArrayList<String> showNames = new ArrayList<>();
-
     RecyclerView trending_rv;
     private ShowlistRecyclerViewAdapter adapter;
+    String apiKey = "4bb376189becc0b82f734fd11af958a0";
+    private List<TvSeries> trendingShows;
+    private ArrayList<Integer> showIds = new ArrayList<>();
+    private ArrayList<String> showNames = new ArrayList<>();
+    private ArrayList<String> posterUrls = new ArrayList<>();
 
     public HomeFragment() {
         // Required empty public constructor
@@ -70,16 +80,14 @@ public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapte
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        showNames.add("Stranger Things");
-        showNames.add("Breaking Bad");
-        showNames.add("The 100");
-        showNames.add("Game of Thrones");
+        GetTrendingShows getTrendingShows = new GetTrendingShows();
+        getTrendingShows.execute();
 
         trending_rv = view.findViewById(R.id.trending_rv);
         trending_rv.setHasFixedSize(true);
         LinearLayoutManager trendingLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         trending_rv.setLayoutManager(trendingLayoutManager);
-        adapter = new ShowlistRecyclerViewAdapter(getActivity(), showNames);
+        adapter = new ShowlistRecyclerViewAdapter(getActivity(), showNames, posterUrls);
         adapter.setClickListener(this);
         trending_rv.setAdapter(adapter);
 
@@ -90,5 +98,51 @@ public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapte
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(getActivity(), "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+    }
+
+    private class GetTrendingShows extends AsyncTask<Void, Void, List<TvSeries>> {
+
+        @Override
+        protected List<TvSeries> doInBackground(Void... voids) {
+            TmdbApi tmdbApi = new TmdbApi(apiKey);
+            List<TvSeries> showQuery = tmdbApi.getTvSeries().getPopular("en",0).getResults();
+            return showQuery;
+        }
+
+        @Override
+        protected void onPostExecute(List<TvSeries> showQuery) {
+            try {
+                trendingShows = showQuery;
+                for(TvSeries tvSeries : showQuery) {
+
+                    showNames.add(tvSeries.getName());
+                    showIds.add(tvSeries.getId());
+                    String posterPath = tvSeries.getPosterPath();
+                    GetPosterImage getPosterImage = new GetPosterImage();
+                    getPosterImage.execute(posterPath);
+                }
+            }
+
+            catch (Exception e) {
+                Toast.makeText(getActivity(), "Sorry, no popular shows found!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private class GetPosterImage extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... posterPaths) {
+            TmdbApi tmdbApi = new TmdbApi(apiKey);
+            Utils utils = new Utils();
+            return Utils.createImageUrl(tmdbApi, posterPaths[0], "w500").toString();
+        }
+
+        @Override
+        protected void onPostExecute(String imageUrl) {
+            Log.e("imageUrl: ",imageUrl.replaceAll("http","https"));
+            posterUrls.add(imageUrl.replaceAll("http","https"));
+            adapter.notifyDataSetChanged();
+        }
     }
 }
