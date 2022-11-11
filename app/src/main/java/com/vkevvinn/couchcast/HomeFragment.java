@@ -135,14 +135,20 @@ public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapte
         protected String doInBackground(String... posterPaths) {
             TmdbApi tmdbApi = new TmdbApi(apiKey);
             Utils utils = new Utils();
-            return Utils.createImageUrl(tmdbApi, posterPaths[0], "original").toString();
+            try{
+                return Utils.createImageUrl(tmdbApi, posterPaths[0], "original").toString();
+            } catch (Exception e) {
+                return "ERROR";
+            }
         }
 
         @Override
         protected void onPostExecute(String imageUrl) {
-            Log.e("imageUrl: ",imageUrl.replaceAll("http","https"));
-            posterUrls.add(imageUrl.replaceAll("http://","https://"));
-            adapter.notifyDataSetChanged();
+            if(!imageUrl.equals("ERROR")) {
+                Log.e("imageUrl: ", imageUrl.replaceAll("http", "https"));
+                posterUrls.add(imageUrl.replaceAll("http://", "https://"));
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 }
