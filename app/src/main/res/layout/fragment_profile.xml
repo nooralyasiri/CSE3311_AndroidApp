@@ -55,7 +55,7 @@
                         app:shapeAppearanceOverlay="@style/circular" />
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/profile_realname_display"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
