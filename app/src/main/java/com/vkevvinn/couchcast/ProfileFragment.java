@@ -1,13 +1,20 @@
 package com.vkevvinn.couchcast;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.vkevvinn.couchcast.backend.FirestoreWrapper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +33,7 @@ public class ProfileFragment extends Fragment {
     private String mParam2;
 
     private TextView username_display;
+    private TextView realname_display;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -64,8 +72,28 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         username_display = view.findViewById(R.id.profile_username_display);
+        realname_display = view.findViewById(R.id.profile_realname_display);
 
-        username_display.setText(((BotNavActivity) getActivity()).getUserName());
+        String userName = ((BotNavActivity) getActivity()).getUserName();
+        FirestoreWrapper firestoreWrapper = new FirestoreWrapper();
+
+        firestoreWrapper.getUserInfo(userName).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    if( task.getResult().exists() ) {
+                        DocumentSnapshot docSnapshot = task.getResult();
+                        String prettyUsername = "@"+docSnapshot.get("userName").toString();
+                        username_display.setText(prettyUsername);
+
+                        String prettyRealname = docSnapshot.get("firstName").toString()+" "+docSnapshot.get("lastName").toString();
+                        realname_display.setText(prettyRealname);
+                    }
+                }
+            }
+        });
+
+
         // Inflate the layout for this fragment
         return view;
     }
