@@ -136,7 +136,7 @@ public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapte
             TmdbApi tmdbApi = new TmdbApi(apiKey);
             Utils utils = new Utils();
             try{
-                return Utils.createImageUrl(tmdbApi, posterPaths[0], "original").toString();
+                return Utils.createImageUrl(tmdbApi, posterPaths[0], "w500").toString();
             } catch (Exception e) {
                 return "https://i.pinimg.com/236x/96/e2/c9/96e2c9bd131c8ae9bb2b88fff69f9579.jpg";
             }
