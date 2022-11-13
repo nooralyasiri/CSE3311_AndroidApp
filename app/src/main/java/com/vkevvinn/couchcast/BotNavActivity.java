@@ -7,9 +7,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
+import com.vkevvinn.couchcast.backend.BaseActivity;
 import com.vkevvinn.couchcast.databinding.ActivityBotNavBinding;
 
-public class BotNavActivity extends AppCompatActivity {
+public class BotNavActivity extends BaseActivity {
 
     ActivityBotNavBinding binding;
 
@@ -42,11 +43,12 @@ public class BotNavActivity extends AppCompatActivity {
 
     }
 
-    private void replaceFragment(Fragment fragment) {
+    public void replaceFragment(Fragment fragment) {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,fragment);
+        fragmentTransaction.replace(R.id.frame_layout,fragment,fragment.toString());
+        fragmentTransaction.addToBackStack(fragment.toString());
         fragmentTransaction.commit();
     }
 }
