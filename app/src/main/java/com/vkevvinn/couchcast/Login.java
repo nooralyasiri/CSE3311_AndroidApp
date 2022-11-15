@@ -13,10 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.vkevvinn.couchcast.backend.BaseActivity;
 import com.vkevvinn.couchcast.backend.FirestoreWrapper;
 import com.vkevvinn.couchcast.backend.PasswordWrapper;
 
-public class Login extends AppCompatActivity {
+public class Login extends BaseActivity {
 
     FirestoreWrapper firestoreWrapper = new FirestoreWrapper();
     TextView userName;
@@ -70,6 +71,7 @@ public class Login extends AppCompatActivity {
                                     && PasswordWrapper.isValid(passwordNoHash.getText().toString(),
                                     docSnapshot.get("createTime").toString(),
                                     docSnapshot.get("hashedPassword").toString())) {
+                                setUserName(docSnapshot.get("userName").toString());
                                 Intent downloadIntent = new Intent(getApplicationContext(), BotNavActivity.class);
                                 startService(downloadIntent);
                                 startActivity(new Intent(Login.this, BotNavActivity.class));

@@ -7,9 +7,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
+import com.vkevvinn.couchcast.backend.BaseActivity;
 import com.vkevvinn.couchcast.databinding.ActivityBotNavBinding;
 
-public class BotNavActivity extends AppCompatActivity {
+public class BotNavActivity extends BaseActivity {
 
     ActivityBotNavBinding binding;
 
@@ -18,7 +19,7 @@ public class BotNavActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityBotNavBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new ProfileFragment());
+        replaceFragment(new HomeFragment());
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
@@ -42,7 +43,7 @@ public class BotNavActivity extends AppCompatActivity {
 
     }
 
-    private void replaceFragment(Fragment fragment) {
+    public void replaceFragment(Fragment fragment) {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

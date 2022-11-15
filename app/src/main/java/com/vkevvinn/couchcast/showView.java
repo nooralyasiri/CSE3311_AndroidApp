@@ -1,4 +1,4 @@
 package com.vkevvinn.couchcast;
 
-public class HomeScreen {
+public class showView {
 }
