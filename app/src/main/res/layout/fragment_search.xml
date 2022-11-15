@@ -54,19 +54,6 @@ android:layout_height="match_parent">
 
 
     <TextView
-        android:id="@+id/trendscreen"
-        android:layout_width="365dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="112dp"
-        android:background="@drawable/cardscreen_rounded"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        android:hint="Find Shows"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/smallercard_recent2"
         android:layout_width="86dp"
         android:layout_height="143dp"
@@ -143,8 +130,19 @@ android:layout_height="match_parent">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Comedy"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="407dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.136"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="414dp" />
+
+    <SearchView
+        android:layout_width="362dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="33dp"
+        android:background="@drawable/cardscreen_rounded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
