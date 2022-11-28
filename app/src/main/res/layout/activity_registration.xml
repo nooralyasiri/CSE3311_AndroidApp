@@ -12,13 +12,14 @@
         android:layout_height="wrap_content"
         android:text="WELCOME!"
         android:textColor="@color/purple_500"
-        android:textSize="72dp"
+        android:textSize="50dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.112" />
 
     <EditText
         android:id="@+id/firstName"
@@ -34,7 +35,7 @@
         android:hint="FIRST NAME"
         android:inputType="text"
         android:textColor="#283D3B"
-        android:textColorHint="#283D3B"
+        android:textColorHint="#818181"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/lastName"
@@ -57,7 +58,7 @@
         android:hint="LAST NAME"
         android:inputType="text"
         android:textColor="#283D3B"
-        android:textColorHint="#283D3B"
+        android:textColorHint="#818181"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +80,7 @@
         android:hint="EMAIL"
         android:inputType="text"
         android:textColor="#283D3B"
-        android:textColorHint="#283D3B"
+        android:textColorHint="#818181"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -100,7 +101,7 @@
         android:hint="CONFIRM EMAIL"
         android:inputType="text"
         android:textColor="#283D3B"
-        android:textColorHint="#283D3B"
+        android:textColorHint="#818181"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -121,7 +122,7 @@
         android:hint="USERNAME"
         android:inputType="text"
         android:textColor="#283D3B"
-        android:textColorHint="#283D3B"
+        android:textColorHint="#818181"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -142,7 +143,7 @@
         android:hint="PASSWORD"
         android:inputType="textPassword"
         android:textColor="#283D3B"
-        android:textColorHint="#283D3B"
+        android:textColorHint="#818181"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -163,7 +164,7 @@
         android:hint="CONFIRM PASSWORD"
         android:inputType="textPassword"
         android:textColor="#283D3B"
-        android:textColorHint="#283D3B"
+        android:textColorHint="#818181"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -216,6 +217,15 @@
         app:layout_constraintStart_toEndOf="@+id/loginReturn"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.953" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="102dp"
+        android:layout_height="86dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/logo"
+        tools:layout_editor_absoluteY="0dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
