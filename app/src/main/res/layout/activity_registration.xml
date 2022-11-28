@@ -220,12 +220,13 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="102dp"
-        android:layout_height="86dp"
+        android:layout_width="92dp"
+        android:layout_height="76dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/logo"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteY="-2dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -52,8 +53,13 @@ public class Login extends BaseActivity {
                     attemptLogin();
                 }
                 else {
-                    userName.setText("User/Password must not be empty!");
-                    passwordNoHash.setText("");
+                    //userName.setText("User/Password must not be empty!");
+                    //passwordNoHash.setText("");
+                    userName.requestFocus();
+                    userName.setError(" Please Enter a Valid Username. ");
+                    passwordNoHash.requestFocus();
+                    passwordNoHash.setError(" Please Enter a Valid Password. ");
+                    //passwordNoHash.setText("");
                 }
             }
         });

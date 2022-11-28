@@ -71,17 +71,26 @@ public class Registration extends AppCompatActivity {
                         getUserInfo();
                     }
 
+                   // if(userName.equals("") || firstName.equals("") ){
+                   //     userName.requestFocus();
+                     //   userName.setError(" Username must not be empty ");
+                  //  }
+
                     else {
-                        password.setText("Password must not be empty and match!");
+                        //password.setText("Password must not be empty and match!");
+                        password.setError(" Password must not be empty and must match! ");
                         passConfirm.setText("");
                     }
                 }
 
                 else {
-                    email.setText("E-Mails must not be empty and match!");
+                    //email.setText("E-Mails must not be empty and match!");
+                    email.requestFocus();
+                    email.setError(" Emails must not be empty and must match! ");
                     emailConfirm.setText("");
                 }
             }
+
         });
     }
 
