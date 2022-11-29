@@ -1,130 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="409dp"
-    android:layout_height="729dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".SearchFragment">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="98dp"
-            android:layout_height="81dp"
-            android:layout_marginStart="165dp"
-            android:layout_marginEnd="83dp"
-            android:layout_marginBottom="671dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/logo" />
+        android:layout_height="match_parent">
 
 
-        <EditText
-            android:id="@+id/searchView"
-            android:layout_width="362dp"
-            android:layout_height="39dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/cardscreen_rounded"
-            android:hint="Enter show search here..."
-            android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.531"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+    </ScrollView>
 
-        <TextView
-            android:id="@+id/recentscreen"
-            android:layout_width="365dp"
-            android:layout_height="145dp"
-            android:layout_marginTop="184dp"
-            android:background="@drawable/cardscreen_rounded"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/trendOne"
-            android:layout_width="152dp"
-            android:layout_height="87dp"
-            android:layout_marginTop="212dp"
-            android:background="@drawable/tempcard"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.155"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/showTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="216dp"
-            android:text="Show Title"
-            android:textColor="#283D3B"
-            android:textSize="25dp"
-            android:visibility="invisible"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="214dp" />
-
-        <TextView
-            android:id="@+id/genre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Genre"
-            android:textColor="#283D3B"
-            android:textSize="16dp"
-            android:visibility="invisible"
-            tools:layout_editor_absoluteX="214dp"
-            tools:layout_editor_absoluteY="264dp" />
-
-        <TextView
-            android:id="@+id/seasonCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="# Seasons"
-            android:textColor="#283D3B"
-            android:textSize="16dp"
-            android:visibility="invisible"
-            tools:layout_editor_absoluteX="283dp"
-            tools:layout_editor_absoluteY="264dp" />
-
-        <Button
-            android:id="@+id/search_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            app:layout_constraintBottom_toTopOf="@+id/recentscreen"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/search_rv"
-            android:layout_width="360dp"
-            android:layout_height="512dp"
-            app:layout_constraintStart_toStartOf="@+id/recentscreen"
-            app:layout_constraintTop_toTopOf="@+id/recentscreen" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="98dp"
+                android:layout_height="81dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/logo" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <EditText
+                android:id="@+id/searchView"
+                android:layout_width="362dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/cardscreen_rounded"
+                android:hint="Enter show search here..."
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.531"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+            <TextView
+                android:id="@+id/recentscreen"
+                android:layout_width="365dp"
+                android:layout_height="145dp"
+                android:layout_marginTop="200dp"
+                android:background="@drawable/cardscreen_rounded"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/trendOne"
+                android:layout_width="152dp"
+                android:layout_height="87dp"
+                android:layout_marginTop="212dp"
+                android:background="@drawable/tempcard"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.155"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/showTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="216dp"
+                android:text="Show Title"
+                android:textColor="#283D3B"
+                android:textSize="25dp"
+                android:visibility="invisible"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="214dp" />
+
+            <TextView
+                android:id="@+id/genre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Genre"
+                android:textColor="#283D3B"
+                android:textSize="16dp"
+                android:visibility="invisible"
+                tools:layout_editor_absoluteX="214dp"
+                tools:layout_editor_absoluteY="264dp" />
+
+            <TextView
+                android:id="@+id/seasonCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="# Seasons"
+                android:textColor="#283D3B"
+                android:textSize="16dp"
+                android:visibility="invisible"
+                tools:layout_editor_absoluteX="283dp"
+                tools:layout_editor_absoluteY="264dp" />
+
+            <Button
+                android:id="@+id/search_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/search_rv"
+                android:layout_width="360dp"
+                android:layout_height="360dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/search_button" />
 
 
-</ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
-
+</FrameLayout>
 
 

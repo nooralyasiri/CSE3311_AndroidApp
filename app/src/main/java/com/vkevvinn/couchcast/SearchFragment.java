@@ -100,8 +100,13 @@ public class SearchFragment extends Fragment implements ShowlistRecyclerViewAdap
 
             @Override
             public void onClick(View view) {
-                GetShowFromSearchTask getShowFromSearchTask = new GetShowFromSearchTask();
-                getShowFromSearchTask.execute(searchBox.getText().toString());
+                if (searchBox.getText().toString().trim().isEmpty()){
+                    Toast.makeText(getActivity(), "Error: search field is blank!",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    GetShowFromSearchTask getShowFromSearchTask = new GetShowFromSearchTask();
+                    getShowFromSearchTask.execute(searchBox.getText().toString());
+                }
 //                startActivity(new Intent(getActivity(), ShowInfo.class));
             }
         });
@@ -154,7 +159,7 @@ public class SearchFragment extends Fragment implements ShowlistRecyclerViewAdap
             try{
                 return Utils.createImageUrl(tmdbApi, posterPaths[0], "w500").toString();
             } catch (Exception e) {
-                return "https://i.pinimg.com/236x/96/e2/c9/96e2c9bd131c8ae9bb2b88fff69f9579.jpg";
+                return "https://sdbeerfestival.com/wp-content/uploads/2018/10/placeholder.jpg";
             }
         }
 
