@@ -1,6 +1,7 @@
 package com.vkevvinn.couchcast;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,6 +22,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.vkevvinn.couchcast.backend.FirestoreWrapper;
+
+import java.io.File;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -109,7 +112,11 @@ public class ProfileFragment extends Fragment {
                     if( task.getResult().exists() ) {
                         DocumentSnapshot docSnapshot = task.getResult();
                         if( docSnapshot.contains("profilePicUri") && !docSnapshot.get("profilePicUri").toString().isEmpty() ) {
-                            profilePic_display.setImageURI(Uri.parse(docSnapshot.get("profilePicUri").toString()));
+                            Uri imageUri = Uri.parse(docSnapshot.get("profilePicUri").toString());
+                            File file = new File(imageUri.getPath());
+                            if( file.exists() ) {
+                                profilePic_display.setImageURI(Uri.parse(docSnapshot.get("profilePicUri").toString()));
+                            }
                         }
                         String prettyUsername = "@"+docSnapshot.get("userName").toString();
                         username_display.setText(prettyUsername);
