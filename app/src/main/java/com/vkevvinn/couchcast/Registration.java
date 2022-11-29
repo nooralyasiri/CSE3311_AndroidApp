@@ -34,6 +34,7 @@ public class Registration extends AppCompatActivity {
     TextView userName;
     TextView firstName;
     TextView lastName;
+    TextView hiddenAlert;
 
 
 
@@ -59,9 +60,23 @@ public class Registration extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+
                 email = findViewById(R.id.email);
                 emailConfirm = findViewById(R.id.emailConfirm);
-                if( !TextUtils.isEmpty(email.getText().toString()) && email.getText().toString().equals(emailConfirm.getText().toString()) )
+                firstName = findViewById(R.id.firstName);
+                lastName = findViewById(R.id.lastName);
+                userName = findViewById(R.id.usernameNew);
+                password = findViewById(R.id.passNew);
+                passConfirm = findViewById(R.id.passConfirm);
+
+
+                if (TextUtils.isEmpty(firstName.getText().toString()) || TextUtils.isEmpty(lastName.getText().toString()) || TextUtils.isEmpty(email.getText().toString()) || TextUtils.isEmpty(emailConfirm.getText().toString()) || TextUtils.isEmpty(userName.getText().toString()) || TextUtils.isEmpty(password.getText().toString()) || TextUtils.isEmpty(passConfirm.getText().toString()))
+                {
+                    registerButton.requestFocus();
+                    registerButton.setError("Empty Field(s)!");
+                }
+
+               else  if( !TextUtils.isEmpty(email.getText().toString()) && email.getText().toString().equals(emailConfirm.getText().toString()) )
                 {
                     password = findViewById(R.id.passNew);
                     passConfirm = findViewById(R.id.passConfirm);
@@ -71,23 +86,19 @@ public class Registration extends AppCompatActivity {
                         getUserInfo();
                     }
 
-                   // if(userName.equals("") || firstName.equals("") ){
-                   //     userName.requestFocus();
-                     //   userName.setError(" Username must not be empty ");
-                  //  }
-
                     else {
                         //password.setText("Password must not be empty and match!");
                         password.setError(" Password must not be empty and must match! ");
                         passConfirm.setText("");
                     }
-                }
+                }  // end of email pass check
 
                 else {
                     //email.setText("E-Mails must not be empty and match!");
                     email.requestFocus();
                     email.setError(" Emails must not be empty and must match! ");
-                    emailConfirm.setText("");
+                    registerButton.setError(" Emails must not be empty and must match! ");
+
                 }
             }
 

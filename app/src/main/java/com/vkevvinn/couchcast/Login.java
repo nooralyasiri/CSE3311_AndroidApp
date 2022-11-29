@@ -49,12 +49,18 @@ public class Login extends BaseActivity {
                 userName = findViewById(R.id.editTextTextUsername);
                 passwordNoHash = findViewById(R.id.editTextTextPassword);
 
-                if( !TextUtils.isEmpty(userName.getText()) && !TextUtils.isEmpty(userName.getText()) ) {
+                if( !TextUtils.isEmpty(userName.getText()) && !TextUtils.isEmpty(passwordNoHash.getText()) ) {
                     attemptLogin();
                 }
+                else if (!TextUtils.isEmpty(userName.getText()) && TextUtils.isEmpty(passwordNoHash.getText())){
+                    passwordNoHash.requestFocus();
+                    passwordNoHash.setError(" Please Enter a Valid Password. ");
+                }
+                else if (TextUtils.isEmpty(userName.getText()) && !TextUtils.isEmpty(passwordNoHash.getText())){
+                    userName.requestFocus();
+                    userName.setError(" Please Enter a Valid Username. ");
+                }
                 else {
-                    //userName.setText("User/Password must not be empty!");
-                    //passwordNoHash.setText("");
                     userName.requestFocus();
                     userName.setError(" Please Enter a Valid Username. ");
                     passwordNoHash.requestFocus();
