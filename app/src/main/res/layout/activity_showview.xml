@@ -32,6 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/seasons"
         android:layout_width="wrap_content"
@@ -41,7 +42,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.88"
+        app:layout_constraintHorizontal_bias="0.899"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.247" />
@@ -55,7 +56,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.467"
+        app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.247" />
@@ -72,17 +73,16 @@
         app:layout_constraintHorizontal_bias="0.627"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.163" />
-
+        app:layout_constraintVertical_bias="0.131" />
 
     <EditText
         android:id="@+id/review"
         android:layout_width="315dp"
-        android:layout_height="146dp"
+        android:layout_height="113dp"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_marginEnd="48dp"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="108dp"
         android:background="@drawable/whitebutton"
         android:ems="10"
         android:hint="Enter Review"
@@ -92,29 +92,6 @@
         android:paddingEnd="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-
-    <EditText
-        android:id="@+id/addToList"
-        android:layout_width="55dp"
-        android:layout_height="52dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/rounded_theme_button"
-        android:ems="5"
-        android:gravity="center"
-        android:hint="+"
-        android:inputType="text"
-        android:textColor="#fff"
-        android:textColorHint="#fff"
-        android:textSize="35sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.907"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.916" />
 
     <TextView
         android:id="@+id/myRating"
@@ -154,23 +131,37 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/watch_label"
+        android:id="@+id/watch_label3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Want to Watch"
+        android:text="Streaming on: "
+        android:textColor="#fff"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.194" />
+
+    <TextView
+        android:id="@+id/watch_label2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add to Favorites"
         android:textColor="#000"
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.552"
+        app:layout_constraintHorizontal_bias="0.528"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.352" />
+        app:layout_constraintVertical_bias="0.342" />
 
     <TextView
         android:id="@+id/showSummary"
-        android:layout_width="315dp"
-        android:layout_height="85dp"
+        android:layout_width="317dp"
+        android:layout_height="80dp"
         android:text="Insert Show Summary Here"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -178,16 +169,53 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="106dp"
-        android:layout_height="38dp"
-        android:layout_marginEnd="136dp"
+        android:id="@+id/heartButton"
+        android:layout_width="82dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="156dp"
         android:adjustViewBounds="true"
         android:background="@drawable/watch_button"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/bookmark2"
-        tools:layout_editor_absoluteY="214dp" />
+        app:srcCompat="@drawable/hhh"
+        tools:layout_editor_absoluteY="209dp" />
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="145dp"
+        android:layout_height="38dp"
+        android:layout_marginEnd="216dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/whitebutton"
+        app:backgroundTint="#fff"
+        android:text="DELETE ENTRY"
+        android:textColor="#283D3B"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        tools:layout_editor_absoluteY="641dp" />
+
+    <Button
+        android:id="@+id/delete2"
+        android:layout_width="145dp"
+        android:layout_height="38dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="52dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/darkgreen_button"
+        android:text="ENTER REVIEW"
+        app:backgroundTint="#283D3B"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="28dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fwarrow" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,13 +12,14 @@
         android:layout_height="wrap_content"
         android:text="WELCOME!"
         android:textColor="@color/purple_500"
-        android:textSize="72dp"
+        android:textSize="50dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.112" />
 
     <EditText
         android:id="@+id/firstName"
@@ -31,10 +32,10 @@
         android:background="@drawable/rounded_button"
         android:ems="5"
         android:gravity="center"
-        android:hint="FIRST NAME"
+        android:hint="First Name"
         android:inputType="text"
         android:textColor="#283D3B"
-        android:textColorHint="#283D3B"
+        android:textColorHint="#818181"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/lastName"
@@ -54,10 +55,10 @@
         android:background="@drawable/rounded_button"
         android:ems="5"
         android:gravity="center"
-        android:hint="LAST NAME"
+        android:hint="Last Name"
         android:inputType="text"
         android:textColor="#283D3B"
-        android:textColorHint="#283D3B"
+        android:textColorHint="#818181"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,10 +77,10 @@
         android:background="@drawable/rounded_button"
         android:ems="10"
         android:gravity="center"
-        android:hint="EMAIL"
+        android:hint="Email"
         android:inputType="text"
         android:textColor="#283D3B"
-        android:textColorHint="#283D3B"
+        android:textColorHint="#818181"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,10 +98,10 @@
         android:background="@drawable/rounded_button"
         android:ems="10"
         android:gravity="center"
-        android:hint="CONFIRM EMAIL"
+        android:hint="Confirm Email"
         android:inputType="text"
         android:textColor="#283D3B"
-        android:textColorHint="#283D3B"
+        android:textColorHint="#818181"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -118,10 +119,10 @@
         android:background="@drawable/rounded_button"
         android:ems="10"
         android:gravity="center"
-        android:hint="USERNAME"
+        android:hint="Username"
         android:inputType="text"
         android:textColor="#283D3B"
-        android:textColorHint="#283D3B"
+        android:textColorHint="#818181"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -139,10 +140,10 @@
         android:background="@drawable/rounded_button"
         android:ems="10"
         android:gravity="center"
-        android:hint="PASSWORD"
+        android:hint="Password"
         android:inputType="textPassword"
         android:textColor="#283D3B"
-        android:textColorHint="#283D3B"
+        android:textColorHint="#818181"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -160,10 +161,10 @@
         android:background="@drawable/rounded_button"
         android:ems="10"
         android:gravity="center"
-        android:hint="CONFIRM PASSWORD"
+        android:hint="Confirm Password"
         android:inputType="textPassword"
         android:textColor="#283D3B"
-        android:textColorHint="#283D3B"
+        android:textColorHint="#818181"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -183,7 +184,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.864" />
+        app:layout_constraintVertical_bias="0.878" />
 
     <TextView
         android:id="@+id/loginReturn"
@@ -216,6 +217,20 @@
         app:layout_constraintStart_toEndOf="@+id/loginReturn"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.953" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="92dp"
+        android:layout_height="76dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/logo"
+        tools:layout_editor_absoluteY="-2dp" />
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
