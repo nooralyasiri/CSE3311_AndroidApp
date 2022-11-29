@@ -202,7 +202,7 @@
                     android:id="@+id/trending_rv"
                     android:layout_width="352dp"
                     android:layout_height="179dp"
-                    android:layout_marginStart="9dp"
+                    android:layout_marginStart="8dp"
                     android:scrollbars="horizontal"
                     app:layout_constraintStart_toStartOf="@+id/trendscreen"
                     app:layout_constraintTop_toBottomOf="@+id/trending" />

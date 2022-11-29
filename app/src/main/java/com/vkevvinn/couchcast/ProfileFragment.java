@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +23,7 @@ import com.vkevvinn.couchcast.backend.FirestoreWrapper;
  * Use the {@link ProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements FavoritesListAdapter.ItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,6 +36,9 @@ public class ProfileFragment extends Fragment {
 
     private TextView username_display;
     private TextView realname_display;
+
+    RecyclerView favoriteslist;
+    private FavoritesListAdapter adapter;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -96,5 +101,10 @@ public class ProfileFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+
     }
 }

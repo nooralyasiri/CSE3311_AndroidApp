@@ -71,6 +71,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/teal_200"
@@ -111,7 +112,45 @@
                         app:layout_constraintTop_toBottomOf="@+id/profile_username_display" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+                    <TextView
+                        android:id="@+id/favorites"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="20dp"
+                        android:paddingLeft="25dp"
+                        android:text="Favorites"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/favoritesscreen"
+                        android:layout_width="371dp"
+                        android:layout_height="179dp"
+                        android:background="@drawable/cardscreen_rounded"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/favorites" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/favoriteslist"
+                        android:layout_width="352dp"
+                        android:layout_height="179dp"
+                        android:layout_marginStart="9dp"
+                        android:scrollbars="vertical"
+                        app:layout_constraintStart_toStartOf="@+id/favoritesscreen"
+                        app:layout_constraintTop_toBottomOf="@+id/favorites" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
     </ScrollView>
 

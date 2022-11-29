@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="170dp"
+    android:layout_margin="17dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/showcardimage"
+            android:layout_width="100dp"
+            android:layout_height="160dp"
+            android:background="@color/white"
+            android:layout_margin="5dp"
+            android:src="@drawable/tempcard"
+            android:elevation="3dp"/>
+
+        <TextView
+            android:id="@+id/showcardtitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="10dp"
+            android:gravity="center_horizontal"
+            android:paddingLeft=".25in"
+            android:text="Show/Movie Title"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/showcarddescription"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="40dp"
+            android:gravity="center_horizontal"
+            android:paddingLeft="75dp"
+            android:text="Show/Movie Description"
+            android:textSize="17dp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
