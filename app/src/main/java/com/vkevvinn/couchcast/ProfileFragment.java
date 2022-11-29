@@ -44,6 +44,8 @@ public class ProfileFragment extends Fragment {
     private ImageView profilePic_display;
     private FloatingActionButton changePic;
 
+    private FirestoreWrapper firestoreWrapper = new FirestoreWrapper();
+
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -99,7 +101,6 @@ public class ProfileFragment extends Fragment {
             }
         });
         String userName = ((BotNavActivity) getActivity()).getUserName();
-        FirestoreWrapper firestoreWrapper = new FirestoreWrapper();
 
         firestoreWrapper.getUserInfo(userName).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -107,6 +108,9 @@ public class ProfileFragment extends Fragment {
                 if (task.isSuccessful()) {
                     if( task.getResult().exists() ) {
                         DocumentSnapshot docSnapshot = task.getResult();
+                        if( docSnapshot.contains("profilePicUri") && !docSnapshot.get("profilePicUri").toString().isEmpty() ) {
+                            profilePic_display.setImageURI(Uri.parse(docSnapshot.get("profilePicUri").toString()));
+                        }
                         String prettyUsername = "@"+docSnapshot.get("userName").toString();
                         username_display.setText(prettyUsername);
 
@@ -128,6 +132,24 @@ public class ProfileFragment extends Fragment {
 
         Uri uri = data.getData();
         profilePic_display.setImageURI(uri);
+
+        String userName = ((BotNavActivity) getActivity()).getUserName();
+        firestoreWrapper.getUserInfo(userName).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    if( task.getResult().exists() ) {
+                        DocumentSnapshot docSnapshot = task.getResult();
+                        firestoreWrapper.addProfilePic(docSnapshot, uri.toString()).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                            }
+                        });
+                    }
+                }
+            }
+        });
 
     }
 }

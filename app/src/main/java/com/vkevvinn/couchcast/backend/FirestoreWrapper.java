@@ -20,4 +20,9 @@ public class FirestoreWrapper {
             .document(username)
             .get();
     }
+
+    public Task<DocumentSnapshot> addProfilePic(DocumentSnapshot documentSnapshot, String uri) {
+        documentSnapshot.getReference().update("profilePicUri", uri);
+        return documentSnapshot.getReference().get();
+    }
 }
