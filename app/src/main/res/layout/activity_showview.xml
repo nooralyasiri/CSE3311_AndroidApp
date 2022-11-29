@@ -131,20 +131,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/watch_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Want to Watch"
-        android:textColor="#000"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.563"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.353" />
-
-    <TextView
         android:id="@+id/watch_label3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -167,10 +153,10 @@
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.907"
+        app:layout_constraintHorizontal_bias="0.528"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.353" />
+        app:layout_constraintVertical_bias="0.342" />
 
     <TextView
         android:id="@+id/showSummary"
@@ -184,27 +170,15 @@
 
     <ImageButton
         android:id="@+id/heartButton"
-        android:layout_width="75dp"
-        android:layout_height="38dp"
-        android:layout_marginEnd="32dp"
+        android:layout_width="82dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="156dp"
         android:adjustViewBounds="true"
         android:background="@drawable/watch_button"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/hhh"
-        tools:layout_editor_absoluteY="214dp" />
-
-    <ImageButton
-        android:id="@+id/bookmarkButton"
-        android:layout_width="106dp"
-        android:layout_height="38dp"
-        android:layout_marginEnd="132dp"
-        android:adjustViewBounds="true"
-        android:background="@drawable/watch_button"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/bookmark2"
-        tools:layout_editor_absoluteY="214dp" />
+        tools:layout_editor_absoluteY="209dp" />
 
     <Button
         android:id="@+id/delete"
