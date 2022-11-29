@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="350dp"
-    android:layout_height="170dp"
-    android:layout_margin="17dp"
+    android:layout_height="115dp"
+    android:layout_margin="5dp"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="10dp"
     app:cardElevation="5dp"
@@ -14,32 +14,42 @@
 
         <ImageView
             android:id="@+id/showcardimage"
-            android:layout_width="100dp"
-            android:layout_height="160dp"
-            android:background="@color/white"
+            android:layout_width="160dp"
+            android:layout_height="105dp"
+            android:background="#ABABAB"
             android:layout_margin="5dp"
             android:src="@drawable/tempcard"
-            android:elevation="3dp"/>
+            android:elevation="3dp" />
 
         <TextView
             android:id="@+id/showcardtitle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="10dp"
+            android:paddingTop="20dp"
             android:gravity="center_horizontal"
-            android:paddingLeft=".25in"
+            android:paddingLeft="1in"
             android:text="Show/Movie Title"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/showcarddescription"
+            android:id="@+id/showcardgenre"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="40dp"
+            android:paddingTop="65dp"
             android:gravity="center_horizontal"
-            android:paddingLeft="75dp"
-            android:text="Show/Movie Description"
-            android:textSize="17dp" />
+            android:paddingLeft="0.45in"
+            android:text="Genre"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/showcardseasons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="65dp"
+            android:gravity="center_horizontal"
+            android:paddingLeft="1.35in"
+            android:text="# Seasons"
+            android:textSize="15dp" />
 
     </RelativeLayout>
 

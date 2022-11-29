@@ -12,6 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import info.movito.themoviedbapi.TmdbApi;
+import info.movito.themoviedbapi.Utils;
+import info.movito.themoviedbapi.model.tv.TvSeries;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,6 +48,12 @@ public class ProfileFragment extends Fragment implements FavoritesListAdapter.It
 
     RecyclerView favoriteslist;
     private FavoritesListAdapter adapter;
+    String apiKey = "4bb376189becc0b82f734fd11af958a0";
+    private ArrayList<Integer> showIds = new ArrayList<>();
+    private ArrayList<String> showNames = new ArrayList<>();
+    private ArrayList<String> showGenre = new ArrayList<>();
+    private ArrayList<String> showSeasons = new ArrayList<>();
+    private ArrayList<String> posterUrls = new ArrayList<>();
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -98,6 +113,13 @@ public class ProfileFragment extends Fragment implements FavoritesListAdapter.It
             }
         });
 
+        favoriteslist = view.findViewById(R.id.favoriteslist);
+        favoriteslist.setHasFixedSize(true);
+        LinearLayoutManager trendingLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        favoriteslist.setLayoutManager(trendingLayoutManager);
+        adapter = new FavoritesListAdapter(getActivity(), showIds, showNames, showGenre, showSeasons, posterUrls);
+        adapter.setClickListener(this);
+        favoriteslist.setAdapter(adapter);
 
         // Inflate the layout for this fragment
         return view;
@@ -106,5 +128,29 @@ public class ProfileFragment extends Fragment implements FavoritesListAdapter.It
     @Override
     public void onItemClick(View view, int position) {
 
+        Toast.makeText(getActivity(), "You clicked " + adapter.getName(position) + adapter.getGenre(position) + adapter.getSeasons(position) + " (Show ID " + adapter.getId(position) + ") on item position " + position, Toast.LENGTH_SHORT).show();
+
     }
+
+    private class GetPosterImage extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... posterPaths) {
+            TmdbApi tmdbApi = new TmdbApi(apiKey);
+            Utils utils = new Utils();
+            try{
+                return Utils.createImageUrl(tmdbApi, posterPaths[0], "w500").toString();
+            } catch (Exception e) {
+                return "https://i.pinimg.com/236x/96/e2/c9/96e2c9bd131c8ae9bb2b88fff69f9579.jpg";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String imageUrl) {
+            Log.e("imageUrl: ", imageUrl.replaceAll("http", "https"));
+            posterUrls.add(imageUrl.replaceAll("http://", "https://"));
+            adapter.notifyDataSetChanged();
+        }
+    }
+
 }
