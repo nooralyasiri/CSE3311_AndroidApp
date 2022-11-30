@@ -116,7 +116,7 @@ public class ShowDetailsFragment extends Fragment {
         return view;
     }
 
-    private class ShowInfoExecutor extends AsyncTask<Integer, String, TvSeries> {
+    private class ShowDetailsExecutor extends AsyncTask<Integer, String, TvSeries> {
 
         String genreList = " ";
 
@@ -156,7 +156,7 @@ public class ShowDetailsFragment extends Fragment {
         protected void onPostExecute(List<TvSeries> showQuery) {
             try {
                 Integer showId = showQuery.get(0).getId();
-                ShowInfo.ShowInfoExecutor showInfoExecutor = new ShowInfo.ShowInfoExecutor();
+                ShowDetailsFragment.ShowDetailsExecutor showInfoExecutor = new ShowDetailsFragment().ShowDetailsExecutor();
                 showInfoExecutor.execute(showId);
 //                for( TvSeries tvSeries : showQuery) {
 //                    Integer showId = tvSeries.getId();
@@ -164,7 +164,7 @@ public class ShowDetailsFragment extends Fragment {
 //                    showInfoExecutor.execute(showId);
 //                }
             } catch (Exception e) {
-                Toast.makeText(View.this, "Sorry, no shows found!", LENGTH_SHORT).show();
+                Toast.makeText(ShowDetailsFragment.this, "Sorry, no shows found!", LENGTH_SHORT).show();
             }
         }
     }
