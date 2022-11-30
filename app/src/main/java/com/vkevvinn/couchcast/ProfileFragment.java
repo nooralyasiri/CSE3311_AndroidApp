@@ -49,6 +49,7 @@ public class ProfileFragment extends Fragment implements FavoritesListAdapter.It
     RecyclerView favoriteslist;
     private FavoritesListAdapter adapter;
     String apiKey = "4bb376189becc0b82f734fd11af958a0";
+    private List<TvSeries> trendingShows;
     private ArrayList<Integer> showIds = new ArrayList<>();
     private ArrayList<String> showNames = new ArrayList<>();
     private ArrayList<String> showGenre = new ArrayList<>();
@@ -113,6 +114,9 @@ public class ProfileFragment extends Fragment implements FavoritesListAdapter.It
             }
         });
 
+        GetTrendingShows getTrendingShows = new GetTrendingShows();
+        getTrendingShows.execute();
+
         favoriteslist = view.findViewById(R.id.favoriteslist);
         favoriteslist.setHasFixedSize(true);
         LinearLayoutManager trendingLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -128,8 +132,38 @@ public class ProfileFragment extends Fragment implements FavoritesListAdapter.It
     @Override
     public void onItemClick(View view, int position) {
 
-        Toast.makeText(getActivity(), "You clicked " + adapter.getName(position) + adapter.getGenre(position) + adapter.getSeasons(position) + " (Show ID " + adapter.getId(position) + ") on item position " + position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "You clicked " + adapter.getName(position) + " (Show ID " + adapter.getId(position) + ") on item position " + position, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "You clicked " + adapter.getName(position) + adapter.getGenre(position) + adapter.getSeasons(position) + " (Show ID " + adapter.getId(position) + ") on item position " + position, Toast.LENGTH_SHORT).show();
 
+    }
+
+    private class GetTrendingShows extends AsyncTask<Void, Void, List<TvSeries>> {
+
+        @Override
+        protected List<TvSeries> doInBackground(Void... voids) {
+            TmdbApi tmdbApi = new TmdbApi(apiKey);
+            List<TvSeries> showQuery = tmdbApi.getTvSeries().getPopular("en-US",0).getResults();
+            return showQuery;
+        }
+
+        @Override
+        protected void onPostExecute(List<TvSeries> showQuery) {
+            try {
+                trendingShows = showQuery;
+                for(TvSeries tvSeries : showQuery) {
+
+                    showNames.add(tvSeries.getName());
+                    showIds.add(tvSeries.getId());
+                    String posterPath = tvSeries.getPosterPath();
+                    GetPosterImage getPosterImage = new GetPosterImage();
+                    getPosterImage.execute(posterPath);
+                }
+            }
+
+            catch (Exception e) {
+                Toast.makeText(getActivity(), "Sorry, no popular shows found!", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private class GetPosterImage extends AsyncTask<String, Void, String> {
@@ -138,7 +172,7 @@ public class ProfileFragment extends Fragment implements FavoritesListAdapter.It
         protected String doInBackground(String... posterPaths) {
             TmdbApi tmdbApi = new TmdbApi(apiKey);
             Utils utils = new Utils();
-            try{
+            try {
                 return Utils.createImageUrl(tmdbApi, posterPaths[0], "w500").toString();
             } catch (Exception e) {
                 return "https://i.pinimg.com/236x/96/e2/c9/96e2c9bd131c8ae9bb2b88fff69f9579.jpg";
@@ -152,5 +186,4 @@ public class ProfileFragment extends Fragment implements FavoritesListAdapter.It
             adapter.notifyDataSetChanged();
         }
     }
-
 }

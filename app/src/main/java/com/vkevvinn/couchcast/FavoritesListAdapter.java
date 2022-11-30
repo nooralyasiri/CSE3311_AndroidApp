@@ -22,7 +22,7 @@ public class FavoritesListAdapter extends RecyclerView.Adapter<FavoritesListAdap
     private List<String> showSeasons;
     private List<String> posterUrls;
     private LayoutInflater inflater;
-    private FavoritesListAdapter.ItemClickListener mClickListener;
+    private ItemClickListener mClickListener;
 
     // data is passed into the constructor
     FavoritesListAdapter(Context context, List<Integer> showIds, List<String> showNames, List<String> showGenre, List<String> showSeasons, List<String> posterUrls) {
@@ -38,20 +38,20 @@ public class FavoritesListAdapter extends RecyclerView.Adapter<FavoritesListAdap
     // inflates the row layout from xml when needed
     @NonNull
     @Override
-    public FavoritesListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.item_favorites, parent, false);
-        return new FavoritesListAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     // binds the data to the view and textview in each row
     @Override
-    public void onBindViewHolder(@NonNull FavoritesListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String showName = showNames.get(position);
         holder.myTextView.setText(showName);
-        String showGenre = this.showGenre.get(position);
-        holder.myTextView.setText(showGenre);
-        String showSeasons = this.showSeasons.get(position);
-        holder.myTextView.setText(showSeasons);
+//        String showGenre = this.showGenre.get(position);
+//        holder.myTextView.setText(showGenre);
+//        String showSeasons = this.showSeasons.get(position);
+//        holder.myTextView.setText(showSeasons);
         try {
             Picasso.get().load(posterUrls.get(position)).error(R.mipmap.ic_launcher).into(holder.myImageView);
         } catch (Exception e) {
@@ -73,8 +73,8 @@ public class FavoritesListAdapter extends RecyclerView.Adapter<FavoritesListAdap
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             myTextView = itemView.findViewById(R.id.showcardtitle);
-            myTextView = itemView.findViewById(R.id.showcardgenre);
-            myTextView = itemView.findViewById(R.id.showcardseasons);
+//            myTextView = itemView.findViewById(R.id.showcardgenre);
+//            myTextView = itemView.findViewById(R.id.showcardseasons);
             myImageView = itemView.findViewById(R.id.showcardimage);
             itemView.setOnClickListener(this);
         }
@@ -99,7 +99,7 @@ public class FavoritesListAdapter extends RecyclerView.Adapter<FavoritesListAdap
     }
 
     // allows clicks events to be caught
-    public void setClickListener(FavoritesListAdapter.ItemClickListener itemClickListener) {
+    public void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
