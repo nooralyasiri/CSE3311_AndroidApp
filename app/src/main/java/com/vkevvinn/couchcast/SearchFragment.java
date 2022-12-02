@@ -155,7 +155,6 @@ public class SearchFragment extends Fragment implements ShowlistRecyclerViewAdap
         @Override
         protected String doInBackground(String... posterPaths) {
             TmdbApi tmdbApi = new TmdbApi(apiKey);
-            Utils utils = new Utils();
             try{
                 return Utils.createImageUrl(tmdbApi, posterPaths[0], "w500").toString();
             } catch (Exception e) {

@@ -2,16 +2,21 @@ package com.vkevvinn.couchcast;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.squareup.picasso.Picasso;
 import com.vkevvinn.couchcast.backend.GetShowWrapper;
 
+import info.movito.themoviedbapi.TmdbApi;
+import info.movito.themoviedbapi.Utils;
 import info.movito.themoviedbapi.model.tv.TvSeries;
 
 public class ShowViewFragment extends Fragment {
@@ -26,7 +31,9 @@ public class ShowViewFragment extends Fragment {
     private TextView username_display;
     private TextView realname_display;
 
-    TextView showTitle;
+    TextView showTitle, showSummary;
+    String apiKey = "4bb376189becc0b82f734fd11af958a0";
+    ImageView showcard;
 
     public ShowViewFragment() {
         // Required empty public constructor
@@ -57,12 +64,13 @@ public class ShowViewFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_showview, container, false);
 
         showTitle = view.findViewById(R.id.showTitle);
+        showSummary = view.findViewById(R.id.showSummary);
+        showcard = view.findViewById(R.id.showcard);
 
         int showId = getArguments().getInt("showId");
         if (showId != 0) {
-            showTitle.setText(String.valueOf(showId));
-//            GetShowAsyncTask getShowAsyncTask = new GetShowAsyncTask();
-//            getShowAsyncTask.execute(showId);
+            GetShowAsyncTask getShowAsyncTask = new GetShowAsyncTask();
+            getShowAsyncTask.execute(showId);
         }
 
         else {
@@ -84,7 +92,10 @@ public class ShowViewFragment extends Fragment {
         protected void onPostExecute(TvSeries tvSeries) {
             try {
 //                    Set UI fields here
-                    return;
+                showTitle.setText(tvSeries.getName());
+                showSummary.setText(tvSeries.getOverview());
+                GetPosterImage getPosterImage = new GetPosterImage();
+                getPosterImage.execute(tvSeries.getPosterPath());
             }
 
             catch (Exception e) {
@@ -93,4 +104,26 @@ public class ShowViewFragment extends Fragment {
         }
     }
 
+    private class GetPosterImage extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... posterPaths) {
+            TmdbApi tmdbApi = new TmdbApi(apiKey);
+            try{
+                return Utils.createImageUrl(tmdbApi, posterPaths[0], "w500").toString();
+            } catch (Exception e) {
+                return "https://i.pinimg.com/236x/96/e2/c9/96e2c9bd131c8ae9bb2b88fff69f9579.jpg";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String imageUrl) {
+            Log.e("imageUrl: ", imageUrl.replaceAll("http", "https"));
+            try {
+                Picasso.get().load(imageUrl.replaceAll("http://", "https://")).error(R.mipmap.ic_launcher).into(showcard);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

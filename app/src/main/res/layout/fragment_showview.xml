@@ -124,14 +124,13 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.655" />
 
-        <TextView
+        <ImageView
             android:id="@+id/showcard"
             android:layout_width="129dp"
             android:layout_height="196dp"
             android:layout_marginTop="72dp"
             android:background="@drawable/tempcard"
             android:textColor="@color/black"
-            android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.106"
             app:layout_constraintStart_toStartOf="parent"
