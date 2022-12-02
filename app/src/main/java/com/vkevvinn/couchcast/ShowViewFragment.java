@@ -26,6 +26,8 @@ public class ShowViewFragment extends Fragment {
     private TextView username_display;
     private TextView realname_display;
 
+    TextView showTitle;
+
     public ShowViewFragment() {
         // Required empty public constructor
     }
@@ -52,14 +54,15 @@ public class ShowViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_showview, container, false);
 
-        Bundle extras = getActivity().getIntent().getExtras();
+        showTitle = view.findViewById(R.id.showTitle);
 
-        if (extras != null) {
-            Integer showId = extras.getInt("showId");
-            GetShowAsyncTask getShowAsyncTask = new GetShowAsyncTask();
-            getShowAsyncTask.execute(showId);
+        int showId = getArguments().getInt("showId");
+        if (showId != 0) {
+            showTitle.setText(String.valueOf(showId));
+//            GetShowAsyncTask getShowAsyncTask = new GetShowAsyncTask();
+//            getShowAsyncTask.execute(showId);
         }
 
         else {
