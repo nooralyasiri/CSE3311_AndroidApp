@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ShowDetailsFragment">
+    android:layout_height="match_parent">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -123,7 +122,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.655" />
 
-        <TextView
+        <ImageView
             android:id="@+id/showPicCard"
             android:layout_width="129dp"
             android:layout_height="196dp"
@@ -193,9 +192,9 @@
             android:layout_marginEnd="216dp"
             android:adjustViewBounds="true"
             android:background="@drawable/whitebutton"
-            app:backgroundTint="#fff"
             android:text="DELETE ENTRY"
             android:textColor="#283D3B"
+            app:backgroundTint="#fff"
             app:layout_constraintEnd_toEndOf="parent"
 
             tools:layout_editor_absoluteY="641dp" />
