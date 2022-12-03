@@ -97,6 +97,11 @@ public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapte
 
     @Override
     public void onItemClick(View view, int position) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("showId",adapter.getId(position));
+        ShowViewFragment showViewFragment = new ShowViewFragment();
+        showViewFragment.setArguments(bundle);
+        ((BotNavActivity) getActivity()).replaceFragment(showViewFragment);
         Toast.makeText(getActivity(), "You clicked " + adapter.getName(position) + " (Show ID " + adapter.getId(position) + ") on item position " + position, Toast.LENGTH_SHORT).show();
     }
 
