@@ -42,7 +42,6 @@ public class SearchFragment extends Fragment implements ShowlistRecyclerViewAdap
     RecyclerView search_rv;
     private ShowlistRecyclerViewAdapter adapter;
     String apiKey = "4bb376189becc0b82f734fd11af958a0";
-    private List<TvSeries> trendingShows;
     private ArrayList<Integer> showIds = new ArrayList<>();
     private ArrayList<String> showNames = new ArrayList<>();
     private ArrayList<String> posterUrls = new ArrayList<>();
@@ -115,7 +114,12 @@ public class SearchFragment extends Fragment implements ShowlistRecyclerViewAdap
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(getActivity(), "You clicked " + adapter.getName(position) + " (Show ID " + adapter.getId(position) + ") on item position " + position, Toast.LENGTH_SHORT).show();
+        Bundle bundle = new Bundle();
+        bundle.putInt("showId",adapter.getId(position));
+        ShowViewFragment showViewFragment = new ShowViewFragment();
+        showViewFragment.setArguments(bundle);
+        ((BotNavActivity) getActivity()).replaceFragment(showViewFragment);
+//        Toast.makeText(getActivity(), "You clicked " + adapter.getName(position) + " (Show ID " + adapter.getId(position) + ") on item position " + position, Toast.LENGTH_SHORT).show();
     }
 
     private class GetShowFromSearchTask extends AsyncTask<String, Void, List<TvSeries>> {
@@ -133,7 +137,6 @@ public class SearchFragment extends Fragment implements ShowlistRecyclerViewAdap
                 showNames.clear();
                 showIds.clear();
                 posterUrls.clear();
-                trendingShows = showQuery;
                 for(TvSeries tvSeries : showQuery) {
 
                     showNames.add(tvSeries.getName());

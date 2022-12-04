@@ -125,7 +125,7 @@
             app:layout_constraintTop_toBottomOf="@+id/showSummary"
             app:layout_constraintVertical_bias="0.788" />
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/showcard"
             android:layout_width="129dp"
             android:layout_height="196dp"
@@ -136,7 +136,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.106"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/round_corners" />
 
         <TextView
             android:id="@+id/watch_label3"

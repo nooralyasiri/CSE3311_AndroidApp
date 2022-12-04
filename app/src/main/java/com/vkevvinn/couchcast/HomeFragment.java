@@ -102,7 +102,7 @@ public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapte
         ShowViewFragment showViewFragment = new ShowViewFragment();
         showViewFragment.setArguments(bundle);
         ((BotNavActivity) getActivity()).replaceFragment(showViewFragment);
-        Toast.makeText(getActivity(), "You clicked " + adapter.getName(position) + " (Show ID " + adapter.getId(position) + ") on item position " + position, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "You clicked " + adapter.getName(position) + " (Show ID " + adapter.getId(position) + ") on item position " + position, Toast.LENGTH_SHORT).show();
     }
 
     private class GetTrendingShows extends AsyncTask<Void, Void, List<TvSeries>> {
@@ -143,7 +143,7 @@ public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapte
             try{
                 return Utils.createImageUrl(tmdbApi, posterPaths[0], "w500").toString();
             } catch (Exception e) {
-                return "https://i.pinimg.com/236x/96/e2/c9/96e2c9bd131c8ae9bb2b88fff69f9579.jpg";
+                return "https://sdbeerfestival.com/wp-content/uploads/2018/10/placeholder.jpg";
             }
         }
 
