@@ -4,6 +4,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class FirestoreWrapper {
@@ -58,8 +60,19 @@ public class FirestoreWrapper {
         });
     }
 
-    public Map<String, Map<String, String>> getFavorites(DocumentSnapshot documentSnapshot) {
-        return (Map<String, Map<String, String>>) documentSnapshot.get(favoritesKey);
+    public List<String> getFavorites(DocumentSnapshot documentSnapshot) {
+        List<String> favoritedList = new ArrayList<>();
+        Map<String, Map<String, String>> favoritesMap = (Map<String, Map<String, String>>) documentSnapshot.get(favoritesKey);
+
+        if (favoritesMap != null) {
+            favoritesMap.keySet().forEach(show -> {
+                if (favoritesMap.get(show).containsKey(favoritedKey) && favoritesMap.get(show).get(favoritedKey).contains("true")) {
+                    favoritedList.add(show);
+                }
+            });
+        }
+
+        return favoritedList;
     }
 
 }

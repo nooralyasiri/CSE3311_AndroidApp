@@ -23,6 +23,7 @@ import com.vkevvinn.couchcast.backend.GetShowWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import info.movito.themoviedbapi.TmdbApi;
 import info.movito.themoviedbapi.Utils;
@@ -95,12 +96,19 @@ public class ProfileFragment extends Fragment implements ShowlistRecyclerViewAda
 
         String userName = ((BotNavActivity) getActivity()).getUserName();
         FirestoreWrapper firestoreWrapper = new FirestoreWrapper();
-        showIds.add(71912);
-        showIds.add(1396);
-        showIds.add(28136);
-
-        PopulateFavoritesList populateFavoritesList = new PopulateFavoritesList();
-        populateFavoritesList.execute(showIds);
+        firestoreWrapper.getUserInfo(userName).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<String> favoritesList = firestoreWrapper.getFavorites(task.getResult());
+                    favoritesList.forEach(show -> {
+                        showIds.add(Integer.parseInt(show));
+                    });
+                    PopulateFavoritesList populateFavoritesList = new PopulateFavoritesList();
+                    populateFavoritesList.execute(showIds);
+                }
+            }
+        });
 
         firestoreWrapper.getUserInfo(userName).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
