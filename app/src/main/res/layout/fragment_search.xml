@@ -42,7 +42,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rounded_button"
-                android:hint="Enter show search here..."
+                android:hint="Search Shows"
                 android:inputType="text"
                 android:paddingLeft="10dp"
                 android:textColor="#283D3B"

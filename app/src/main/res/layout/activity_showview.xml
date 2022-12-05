@@ -182,7 +182,7 @@
         android:background="@drawable/watch_button"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toStartOf="@+id/seasons"
-        app:layout_constraintHorizontal_bias="0.277"
+        app:layout_constraintHorizontal_bias="0.317"
         app:layout_constraintStart_toEndOf="@+id/showcard"
         app:layout_constraintTop_toBottomOf="@+id/trendscreen2"
         app:srcCompat="@drawable/hhh" />
