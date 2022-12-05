@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,9 +33,11 @@ public class ShowViewFragment extends Fragment {
     private TextView username_display;
     private TextView realname_display;
 
-    TextView showTitle, showSummary;
+    TextView showTitle, showSummary, showReview;
     String apiKey = "4bb376189becc0b82f734fd11af958a0";
     ImageView showcard;
+    RatingBar ratingBar;
+    Button deleteEntry;
 
     public ShowViewFragment() {
         // Required empty public constructor
@@ -66,6 +70,17 @@ public class ShowViewFragment extends Fragment {
         showTitle = view.findViewById(R.id.showTitle);
         showSummary = view.findViewById(R.id.showSummary);
         showcard = view.findViewById(R.id.showcard);
+        ratingBar = view.findViewById(R.id.ratingBar);
+        deleteEntry = view.findViewById(R.id.deleteEntry);
+        showReview = view.findViewById(R.id.review);
+
+        deleteEntry.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                showReview.setText(String.valueOf(ratingBar.getRating()));
+            }
+        });
 
         int showId = getArguments().getInt("showId");
         if (showId != 0) {
