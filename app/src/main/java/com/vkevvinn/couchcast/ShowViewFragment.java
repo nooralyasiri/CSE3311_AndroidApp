@@ -12,9 +12,14 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.squareup.picasso.Picasso;
+import com.vkevvinn.couchcast.backend.FirestoreWrapper;
 import com.vkevvinn.couchcast.backend.GetShowWrapper;
 
 import info.movito.themoviedbapi.TmdbApi;
@@ -37,7 +42,7 @@ public class ShowViewFragment extends Fragment {
     String apiKey = "4bb376189becc0b82f734fd11af958a0";
     ImageView showcard;
     RatingBar ratingBar;
-    Button deleteEntry;
+    Button deleteEntry, enterReview;
 
     public ShowViewFragment() {
         // Required empty public constructor
@@ -73,14 +78,11 @@ public class ShowViewFragment extends Fragment {
         ratingBar = view.findViewById(R.id.ratingBar);
         deleteEntry = view.findViewById(R.id.deleteEntry);
         showReview = view.findViewById(R.id.review);
+        enterReview = view.findViewById(R.id.enterReview);
 
-        deleteEntry.setOnClickListener(new View.OnClickListener() {
+        String userName = ((BotNavActivity) getActivity()).getUserName();
+        FirestoreWrapper firestoreWrapper = new FirestoreWrapper();
 
-            @Override
-            public void onClick(View view) {
-                showReview.setText(String.valueOf(ratingBar.getRating()));
-            }
-        });
 
         int showId = getArguments().getInt("showId");
         if (showId != 0) {
@@ -91,6 +93,36 @@ public class ShowViewFragment extends Fragment {
         else {
             Toast.makeText(ShowViewFragment.this.getContext(), "Something went wrong!  Please try again.", Toast.LENGTH_SHORT).show();
         }
+
+        enterReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firestoreWrapper.addReview(userName, showId, showReview.getText().toString()).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(ShowViewFragment.this.getContext(), "Review "+ "\""+showReview.getText().toString()+"\"" +" successfully added!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                firestoreWrapper.addRating(userName, showId, ratingBar.getRating()).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(ShowViewFragment.this.getContext(), "Rating successfully added!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+
+        deleteEntry.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                showReview.setText(String.valueOf(ratingBar.getRating()));
+            }
+        });
 
         return view;
     }
