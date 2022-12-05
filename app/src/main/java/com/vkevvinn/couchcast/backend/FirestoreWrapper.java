@@ -4,9 +4,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class FirestoreWrapper {
@@ -33,29 +30,7 @@ public class FirestoreWrapper {
         String showString = showId.toString();
 
         return getUserInfo(username).addOnSuccessListener(documentSnapshot -> {
-            Map<String, Map<String, String>> currentFavorites = (Map<String, Map<String, String>>)documentSnapshot.get("favorites");
-
-            if (currentFavorites == null) {
-                currentFavorites = new HashMap<String, Map<String,String>>();
-            }
-
-            if (!currentFavorites.containsKey(showString)) {
-                Map<String, String> favoriteMap = new HashMap<>();
-                favoriteMap.put(favoritedKey, "true");
-                currentFavorites.put(showString, favoriteMap);
-            }
-
-            else {
-                if (currentFavorites.get(showString).containsKey(favoritedKey)) {
-                    currentFavorites.get(showString).replace(favoritedKey, "true");
-                }
-
-                else {
-                    currentFavorites.get(showString).putIfAbsent(favoritedKey, "true");
-                }
-            }
-
-            documentSnapshot.getReference().update(favoritesKey, currentFavorites);
+            documentSnapshot.getReference().update(favoritesKey + "." + showString + "." + favoritedKey, "true");
         });
     }
 
@@ -63,11 +38,7 @@ public class FirestoreWrapper {
         String showString = showId.toString();
 
         return getUserInfo(username).addOnSuccessListener(documentSnapshot -> {
-            Map<String, Map<String, String>> currentFavorites = (Map<String, Map<String, String>>) documentSnapshot.get("favorites");
-            if (currentFavorites != null) {
-                currentFavorites.remove(showString);
-                documentSnapshot.getReference().update(favoritesKey, currentFavorites);
-            }
+            documentSnapshot.getReference().update(favoritesKey + "." + showString + "." + favoritedKey, "false");
         });
     }
 
@@ -75,32 +46,7 @@ public class FirestoreWrapper {
         String showString = showId.toString();
 
         return getUserInfo(username).addOnSuccessListener(documentSnapshot -> {
-            Map<String, Map<String, String>> currentFavorites = (Map<String, Map<String, String>>) documentSnapshot.get("favorites");
-
-            if (currentFavorites == null) {
-                currentFavorites = new HashMap<String, Map<String,String>>();
-            }
-
-            if (currentFavorites.containsKey(showString)) {
-                if (currentFavorites.get(showString).containsKey(ratingValKey)) {
-                    currentFavorites.get(showString).replace(ratingValKey, Float.toString(ratingVal));
-                }
-
-                else {
-                    currentFavorites.get(showString).putIfAbsent(ratingValKey, Float.toString(ratingVal));
-                }
-
-            }
-
-            else {
-                Map<String, Map<String, String>> newFavoritesMap = new HashMap<>();
-                Map<String, String> ratingMap = new HashMap<>();
-                ratingMap.put(ratingValKey, Float.toString(ratingVal));
-                newFavoritesMap.put(showString, ratingMap);
-                currentFavorites = newFavoritesMap;
-            }
-
-            documentSnapshot.getReference().update(favoritesKey, currentFavorites);
+            documentSnapshot.getReference().update(favoritesKey + "." + showString + "." + ratingValKey, ratingVal);
         });
     }
 
@@ -108,31 +54,7 @@ public class FirestoreWrapper {
         String showString = showId.toString();
 
         return getUserInfo(username).addOnSuccessListener(documentSnapshot -> {
-            Map<String, Map<String, String>> currentFavorites = (Map<String, Map<String, String>>) documentSnapshot.get("favorites");
-
-            if (currentFavorites == null) {
-                currentFavorites = new HashMap<String, Map<String,String>>();
-            }
-
-            if (currentFavorites.containsKey(showString)) {
-                if (currentFavorites.get(showString).containsKey(reviewValKey)) {
-                    currentFavorites.get(showString).replace(reviewValKey, reviewVal);
-                }
-
-                else {
-                    currentFavorites.get(showString).putIfAbsent(reviewValKey, reviewVal);
-                }
-            }
-
-            else {
-                Map<String, Map<String, String>> newFavoritesMap = new HashMap<>();
-                Map<String, String> reviewMap = new HashMap<>();
-                reviewMap.put(reviewValKey, reviewVal);
-                newFavoritesMap.put(showString, reviewMap);
-                currentFavorites = newFavoritesMap;
-            }
-
-            documentSnapshot.getReference().update(favoritesKey, currentFavorites);
+            documentSnapshot.getReference().update(favoritesKey + "." + showString + "." + reviewValKey, reviewVal);
         });
     }
 
