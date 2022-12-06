@@ -2,6 +2,7 @@ package com.vkevvinn.couchcast;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,6 +79,7 @@ public class ShowViewFragment extends Fragment {
         heart = view.findViewById(R.id.heartButton);
         showcard = view.findViewById(R.id.showcard);
         showSummary = view.findViewById(R.id.showSummary);
+        showSummary.setMovementMethod(new ScrollingMovementMethod());
         ratingBar = view.findViewById(R.id.ratingBar);
         showReview = view.findViewById(R.id.review);
         deleteEntry = view.findViewById(R.id.deleteEntry);
@@ -120,7 +122,15 @@ public class ShowViewFragment extends Fragment {
                 showTitle.setText(tvSeries.getName());
                 showSummary.setText(tvSeries.getOverview());
                 genre.setText(tvSeries.getGenres().get(0).getName());
-                seasons.setText(tvSeries.getNumberOfSeasons() + " Seasons");
+                if (tvSeries.getNumberOfSeasons() == 1)
+                {
+                    seasons.setText(tvSeries.getNumberOfSeasons() + " Season");
+                }
+                else
+                {
+                    seasons.setText(tvSeries.getNumberOfSeasons() + " Seasons");
+                }
+
                 GetPosterImage getPosterImage = new GetPosterImage();
                 getPosterImage.execute(tvSeries.getPosterPath());
             }
