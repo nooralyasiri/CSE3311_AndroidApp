@@ -10,23 +10,27 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/teal_700">
+        android:background="#C8C8C8">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/teal_700">
+                android:background="#C8C8C8
+">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/favorites_rv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/favoritesTitle" />
 
@@ -34,66 +38,68 @@
                     android:id="@+id/favoritesTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Favorites"
+                    android:layout_marginTop="20dp"
+                    android:text="Favorites:"
+                    android:textColor="#707070"
                     android:textSize="20dp"
-                    android:textColor="@android:color/white"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.092"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/purple_200"
+                    android:layout_width="409dp"
+                    android:layout_height="208dp"
+                    android:background="#fff"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="40dp"
-                        android:text="Profile"
-                        android:textColor="@color/white"
-                        android:textSize="20sp"
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/profilePic"
+                        android:layout_width="114dp"
+                        android:layout_height="114dp"
+                        android:background="@drawable/circlepfp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.829"
+                        app:shapeAppearanceOverlay="@style/circular" />
+
+                    <ImageView
+                        android:id="@+id/imageView10"
+                        android:layout_width="85dp"
+                        android:layout_height="61dp"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/transparent_logo"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="128dp"
-                        android:layout_height="128dp"
-                        android:layout_marginTop="40dp"
-                        android:src="@drawable/logo"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView"
-                        app:shapeAppearanceOverlay="@style/circular" />
-
-                    <TextView
-                        android:id="@+id/profile_realname_display"
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/changePic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="John Smith"
-                        android:textColor="@color/white"
-                        android:textSize="25sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                        android:layout_marginEnd="-10dp"
+                        android:layout_marginBottom="-10dp"
+                        android:clickable="true"
+                        android:contentDescription="Button to change user's profile picture"
+                        android:backgroundTint="#808080"
+                        android:src="@drawable/ic_photo_camera_black_48dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/profilePic"
+                        app:layout_constraintEnd_toEndOf="@+id/profilePic" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/teal_200"
+                    android:layout_width="411dp"
+                    android:layout_height="108dp"
+                    android:background="#DBDBDB"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
@@ -102,13 +108,28 @@
                         android:id="@+id/profile_username_display"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="36dp"
                         android:background="@drawable/round_style"
-                        android:backgroundTint="@color/purple_500"
                         android:padding="6dp"
                         android:text="\@xjohnny_s96"
-                        android:textColor="@color/white"
+                        android:textColor="#707070"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/profile_realname_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/round_style"
+                        android:padding="6dp"
+                        android:text="firstName lastName"
+                        android:textColor="#707070"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -119,16 +140,17 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="30dp"
                         android:background="@drawable/round_style"
-                        android:backgroundTint="@color/teal_700"
                         android:maxWidth="250dp"
-                        android:padding="12dp"
+                        android:padding="8dp"
                         android:text="trackin' my fav shows! :)"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="#707070"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/profile_username_display" />
+                        app:layout_constraintTop_toBottomOf="@+id/profile_username_display"
+                        app:layout_constraintVertical_bias="0.312" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
