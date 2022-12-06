@@ -69,10 +69,10 @@
 
                 <TextView
                     android:id="@+id/trending2"
-                    android:layout_width="192dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_marginStart="20dp"
-                    android:text="Recently added by you!"
+                    android:text="Pick up where you left off!"
                     android:textColor="#283D3B"
                     android:textSize="18dp"
                     app:layout_constraintBottom_toTopOf="@+id/recentscreen"
@@ -102,7 +102,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/trendscreen" />
 
-                <TextView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/smallercard_recent"
                     android:layout_width="86dp"
                     android:layout_height="143dp"
@@ -110,9 +110,11 @@
                     android:layout_marginTop="24dp"
                     android:background="@drawable/tempcard"
                     android:textColor="@color/black"
+                    android:scaleType="centerCrop"
                     android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="@+id/recentscreen"
-                    app:layout_constraintTop_toTopOf="@+id/recentscreen" />
+                    app:layout_constraintTop_toTopOf="@+id/recentscreen"
+                    app:shapeAppearanceOverlay="@style/round_corners" />
 
                 <TextView
                     android:id="@+id/trendOne"
@@ -152,11 +154,12 @@
 
                 <TextView
                     android:id="@+id/showTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
                     android:text="Show Title"
                     android:textColor="#283D3B"
-                    android:textSize="25dp"
+                    android:textSize="24dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/recentscreen"
                     app:layout_constraintHorizontal_bias="0.22"
@@ -169,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:text="Genre"
                     android:textColor="#283D3B"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/showTitle"
                     app:layout_constraintTop_toBottomOf="@+id/showTitle" />
@@ -178,21 +181,30 @@
                     android:id="@+id/seasonCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:text="# Seasons"
+                    android:text="# Seasons, "
                     android:textColor="#283D3B"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/genre"
-                    app:layout_constraintTop_toBottomOf="@+id/showTitle" />
+                    app:layout_constraintStart_toStartOf="@+id/genre"
+                    app:layout_constraintTop_toBottomOf="@+id/genre" />
+
+                <TextView
+                    android:id="@+id/episodeCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="# Episodes"
+                    android:textColor="#283D3B"
+                    android:textSize="16dp"
+                    app:layout_constraintStart_toEndOf="@+id/seasonCount"
+                    app:layout_constraintTop_toBottomOf="@+id/genre" />
 
                 <TextView
                     android:id="@+id/synopsis"
                     android:layout_width="217dp"
                     android:layout_height="71dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="15dp"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius."
+                    android:layout_marginStart="15dp"
+                    android:scrollbars="vertical"
+                    android:text="Start browsing shows to populate this card!"
                     android:textColor="#283D3B"
                     android:textSize="15dp"
                     app:layout_constraintStart_toEndOf="@+id/smallercard_recent"

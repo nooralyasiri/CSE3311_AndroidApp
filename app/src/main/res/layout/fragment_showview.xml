@@ -10,21 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <TextView
-            android:id="@+id/summary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Summary:"
-            android:textColor="#000"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toTopOf="@+id/myRating"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.09"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/showcard"
-            app:layout_constraintVertical_bias="0.179" />
-
         <TextView
             android:id="@+id/trendscreen2"
             android:layout_width="match_parent"
@@ -37,190 +22,169 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <TextView
-            android:id="@+id/seasons"
+            android:id="@+id/showTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:inputType="textMultiLine"
+            android:text="Show Title"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            app:layout_constraintStart_toEndOf="@id/showcard"
+            app:layout_constraintEnd_toStartOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/showcard" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="# Seasons"
-            android:textColor="#000"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/heartButton"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/showcard"
+            android:layout_width="129dp"
+            android:layout_height="196dp"
+            android:layout_marginTop="65dp"
+            android:background="@drawable/tempcard"
+            android:scaleType="centerCrop"
+            android:textColor="@color/black"
+            android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.752"
-            app:layout_constraintStart_toEndOf="@+id/showcard"
-            app:layout_constraintTop_toTopOf="@+id/trendscreen2"
-            app:layout_constraintVertical_bias="0.963" />
+            app:layout_constraintHorizontal_bias="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/round_corners" />
 
         <TextView
             android:id="@+id/genre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+
             android:text="Genre"
             android:textColor="#000"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/heartButton"
-            app:layout_constraintEnd_toStartOf="@+id/seasons"
-            app:layout_constraintHorizontal_bias="0.189"
-            app:layout_constraintStart_toEndOf="@+id/showcard"
-            app:layout_constraintTop_toBottomOf="@+id/trendscreen2"
-            app:layout_constraintVertical_bias="0.758" />
+            android:textSize="15sp"
+            app:layout_constraintLeft_toRightOf="@id/showcard"
+            app:layout_constraintTop_toBottomOf="@+id/trendscreen2" />
 
         <TextView
-            android:id="@+id/showTitle"
+            android:id="@+id/seasons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Show Title"
-            android:textColor="#fff"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="@+id/trendscreen2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.086"
-            app:layout_constraintStart_toEndOf="@+id/showcard"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.776" />
-
-        <EditText
-            android:id="@+id/review"
-            android:layout_width="315dp"
-            android:layout_height="113dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="108dp"
-            android:background="@drawable/whitebutton"
-            android:ems="10"
-            android:hint="Enter Review"
-            android:inputType="textMultiLine"
-            android:maxLength="250"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.504"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/showSummary"
-            app:layout_constraintVertical_bias="0.835" />
-
-        <TextView
-            android:id="@+id/myRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="My Rating:"
+            android:layout_marginLeft="10dp"
+            android:text="# Seasons"
             android:textColor="#000"
             android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.092"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.588" />
-
-        <RatingBar
-            android:id="@+id/ratingBar"
-            android:layout_width="235dp"
-            android:layout_height="45dp"
-            app:layout_constraintBottom_toTopOf="@+id/review"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/showSummary"
-            app:layout_constraintVertical_bias="0.788" />
-
-        <ImageView
-            android:id="@+id/showcard"
-            android:layout_width="129dp"
-            android:layout_height="196dp"
-            android:layout_marginTop="72dp"
-            android:background="@drawable/tempcard"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.106"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/watch_label3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Streaming on: "
-            android:textColor="#fff"
-            android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.069"
-            app:layout_constraintStart_toEndOf="@+id/showcard"
-            app:layout_constraintTop_toBottomOf="@+id/showTitle"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/watch_label2"
-            android:layout_width="83dp"
-            android:layout_height="21dp"
-            android:text="Add to Favorites"
-            android:textColor="#000"
-            android:textSize="11sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/seasons"
-            app:layout_constraintHorizontal_bias="0.285"
-            app:layout_constraintStart_toEndOf="@+id/showcard"
-            app:layout_constraintTop_toBottomOf="@+id/heartButton"
-            app:layout_constraintVertical_bias="0.004" />
-
-        <TextView
-            android:id="@+id/showSummary"
-            android:layout_width="317dp"
-            android:layout_height="80dp"
-            android:text="Insert Show Summary Here"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.505"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/watch_label2"
-            app:layout_constraintVertical_bias="0.154" />
+            app:layout_constraintLeft_toRightOf="@id/showcard"
+            app:layout_constraintTop_toBottomOf="@+id/genre" />
 
         <ImageButton
             android:id="@+id/heartButton"
             android:layout_width="78dp"
             android:layout_height="33dp"
-            android:layout_marginTop="56dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
             android:adjustViewBounds="true"
             android:background="@drawable/watch_button"
             android:scaleType="fitCenter"
-            app:layout_constraintEnd_toStartOf="@+id/seasons"
-            app:layout_constraintHorizontal_bias="0.277"
-            app:layout_constraintStart_toEndOf="@+id/showcard"
-            app:layout_constraintTop_toBottomOf="@+id/trendscreen2"
-            app:srcCompat="@drawable/hhh" />
+            app:srcCompat="@drawable/hhh"
+            app:layout_constraintTop_toBottomOf="@id/seasons"
+            app:layout_constraintLeft_toRightOf="@id/showcard" />
+
+        <TextView
+            android:id="@+id/addFavorite"
+            android:layout_width="83dp"
+            android:layout_height="18dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:text="Add to Favorites"
+            android:textColor="#000"
+            android:textSize="11sp"
+            app:layout_constraintTop_toBottomOf="@id/heartButton"
+            app:layout_constraintLeft_toRightOf="@id/showcard"/>
+
+        <TextView
+            android:id="@+id/summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Summary:"
+            android:textColor="#000"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/addFavorite"
+            app:layout_constraintStart_toStartOf="@id/showcard"/>
+
+        <TextView
+            android:id="@+id/showSummary"
+            android:layout_width="317dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="5dp"
+            android:text="Insert Show Summary Here"
+            android:scrollbars="vertical"
+            app:layout_constraintTop_toBottomOf="@id/summary"
+            app:layout_constraintStart_toStartOf="@id/summary"/>
+
+        <TextView
+            android:id="@+id/myRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="My Rating:"
+            android:textColor="#000"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/showSummary"
+            app:layout_constraintStart_toStartOf="@id/showSummary" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="235dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="35dp"
+            android:foregroundGravity="center"
+            app:layout_constraintTop_toBottomOf="@id/myRating"
+            app:layout_constraintStart_toStartOf="@id/myRating"
+            />
+
+        <EditText
+            android:id="@+id/review"
+            android:layout_width="315dp"
+            android:layout_height="113dp"
+            android:background="@drawable/whitebutton"
+            android:ems="10"
+            android:hint="Enter Review"
+            android:inputType="textMultiLine"
+            android:maxLength="250"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@id/ratingBar"
+            app:layout_constraintStart_toStartOf="@id/myRating" />
 
         <Button
-            android:id="@+id/delete"
+            android:id="@+id/deleteEntry"
             android:layout_width="145dp"
             android:layout_height="38dp"
-            android:layout_marginBottom="52dp"
             android:adjustViewBounds="true"
             android:background="@drawable/whitebutton"
             android:text="DELETE ENTRY"
             android:textColor="#283D3B"
             app:backgroundTint="#fff"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/delete2"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@id/review"
+            app:layout_constraintStart_toStartOf="@id/review"/>
 
         <Button
-            android:id="@+id/delete2"
+            android:id="@+id/enterReview"
             android:layout_width="145dp"
             android:layout_height="38dp"
-            android:layout_marginBottom="52dp"
             android:adjustViewBounds="true"
             android:background="@drawable/darkgreen_button"
             android:text="ENTER REVIEW"
             app:backgroundTint="#283D3B"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/delete" />
+            app:layout_constraintEnd_toEndOf="@+id/review"
+            app:layout_constraintTop_toTopOf="@id/deleteEntry"/>
 
         <ImageView
             android:id="@+id/imageView8"

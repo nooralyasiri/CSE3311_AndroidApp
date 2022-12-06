@@ -1,20 +1,33 @@
 package com.vkevvinn.couchcast;
 
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.squareup.picasso.Picasso;
+import com.vkevvinn.couchcast.backend.FirestoreWrapper;
+import com.vkevvinn.couchcast.backend.GetShowWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import info.movito.themoviedbapi.TmdbApi;
 import info.movito.themoviedbapi.Utils;
@@ -43,6 +56,12 @@ public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapte
     private ArrayList<Integer> showIds = new ArrayList<>();
     private ArrayList<String> showNames = new ArrayList<>();
     private ArrayList<String> posterUrls = new ArrayList<>();
+    private ArrayList<Integer> favoritesIds = new ArrayList<>();
+    private String recentlyAddedPosterUrl;
+    private int recentlyAddedShowId;
+    ImageView smallercard_recent;
+    TextView showTitle, synopsis, genre, seasonCount, episodeCount;
+    boolean hasRecentShow = false;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -83,6 +102,14 @@ public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapte
         GetTrendingShows getTrendingShows = new GetTrendingShows();
         getTrendingShows.execute();
 
+        smallercard_recent = view.findViewById(R.id.smallercard_recent);
+        synopsis = view.findViewById(R.id.synopsis);
+        synopsis.setMovementMethod(new ScrollingMovementMethod());
+        genre = view.findViewById(R.id.genre);
+        seasonCount = view.findViewById(R.id.seasonCount);
+        episodeCount = view.findViewById(R.id.episodeCount);
+        showTitle = view.findViewById(R.id.showTitle);
+
         trending_rv = view.findViewById(R.id.trending_rv);
         trending_rv.setHasFixedSize(true);
         LinearLayoutManager trendingLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -90,6 +117,37 @@ public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapte
         adapter = new ShowlistRecyclerViewAdapter(getActivity(), showIds, showNames, posterUrls);
         adapter.setClickListener(this);
         trending_rv.setAdapter(adapter);
+
+        String userName = ((BotNavActivity) getActivity()).getUserName();
+        FirestoreWrapper firestoreWrapper = new FirestoreWrapper();
+        firestoreWrapper.getUserInfo(userName).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<String> favoritesList = firestoreWrapper.getFavorites(task.getResult());
+                    favoritesList.forEach(show -> {
+                        favoritesIds.add(Integer.parseInt(show));
+                    });
+                    if ( !favoritesIds.isEmpty() ) {
+                        hasRecentShow = true;
+                        smallercard_recent.setClickable(true);
+                        PopulateRecentlyAdded populateRecentlyAdded = new PopulateRecentlyAdded();
+                        populateRecentlyAdded.execute(favoritesIds.get(ThreadLocalRandom.current().nextInt(0,favoritesIds.size())));
+                    }
+                }
+            }
+        });
+
+        smallercard_recent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("showId",recentlyAddedShowId);
+                ShowViewFragment showViewFragment = new ShowViewFragment();
+                showViewFragment.setArguments(bundle);
+                ((BotNavActivity) getActivity()).replaceFragment(showViewFragment);
+            }
+        });
 
         // Inflate the layout for this fragment
         return view;
@@ -102,56 +160,71 @@ public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapte
         ShowViewFragment showViewFragment = new ShowViewFragment();
         showViewFragment.setArguments(bundle);
         ((BotNavActivity) getActivity()).replaceFragment(showViewFragment);
-        Toast.makeText(getActivity(), "You clicked " + adapter.getName(position) + " (Show ID " + adapter.getId(position) + ") on item position " + position, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "You clicked " + adapter.getName(position) + " (Show ID " + adapter.getId(position) + ") on item position " + position, Toast.LENGTH_SHORT).show();
     }
 
-    private class GetTrendingShows extends AsyncTask<Void, Void, List<TvSeries>> {
+    private class GetTrendingShows extends AsyncTask<Void, Void, String> {
 
         @Override
-        protected List<TvSeries> doInBackground(Void... voids) {
+        protected String doInBackground(Void... voids) {
             TmdbApi tmdbApi = new TmdbApi(apiKey);
             List<TvSeries> showQuery = tmdbApi.getTvSeries().getPopular("en-US",0).getResults();
-            return showQuery;
-        }
-
-        @Override
-        protected void onPostExecute(List<TvSeries> showQuery) {
             try {
                 trendingShows = showQuery;
                 for(TvSeries tvSeries : showQuery) {
-
                     showNames.add(tvSeries.getName());
                     showIds.add(tvSeries.getId());
-                    String posterPath = tvSeries.getPosterPath();
-                    GetPosterImage getPosterImage = new GetPosterImage();
-                    getPosterImage.execute(posterPath);
+                    GetShowWrapper getShowWrapper = new GetShowWrapper();
+                    String posterUrl = getShowWrapper.getPosterUrl(tvSeries.getId());
+                    posterUrls.add(posterUrl);
                 }
             }
 
             catch (Exception e) {
                 Toast.makeText(getActivity(), "Sorry, no popular shows found!", Toast.LENGTH_SHORT).show();
             }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String unusedString) {
+            adapter.notifyDataSetChanged();
         }
     }
 
-    private class GetPosterImage extends AsyncTask<String, Void, String> {
+    private class PopulateRecentlyAdded extends AsyncTask<Integer, Void, TvSeries> {
 
         @Override
-        protected String doInBackground(String... posterPaths) {
-            TmdbApi tmdbApi = new TmdbApi(apiKey);
-            Utils utils = new Utils();
-            try{
-                return Utils.createImageUrl(tmdbApi, posterPaths[0], "w500").toString();
-            } catch (Exception e) {
-                return "https://i.pinimg.com/236x/96/e2/c9/96e2c9bd131c8ae9bb2b88fff69f9579.jpg";
-            }
+        protected TvSeries doInBackground(Integer... showId) {
+            GetShowWrapper getShowWrapper = new GetShowWrapper();
+            recentlyAddedPosterUrl = getShowWrapper.getPosterUrl(showId[0]);
+            return getShowWrapper.getTvSeriesById(showId[0]);
         }
 
         @Override
-        protected void onPostExecute(String imageUrl) {
-            Log.e("imageUrl: ", imageUrl.replaceAll("http", "https"));
-            posterUrls.add(imageUrl.replaceAll("http://", "https://"));
-            adapter.notifyDataSetChanged();
+        protected void onPostExecute(TvSeries tvSeries) {
+            recentlyAddedShowId = tvSeries.getId();
+            showTitle.setText(tvSeries.getName());
+            genre.setText(tvSeries.getGenres().get(0).getName());
+            if (tvSeries.getNumberOfSeasons() == 1) {
+                seasonCount.setText(tvSeries.getNumberOfSeasons() + " Season, ");
+            }
+            else {
+                seasonCount.setText(tvSeries.getNumberOfSeasons() + " Seasons, ");
+            }
+            if (tvSeries.getNumberOfEpisodes() == 1) {
+                episodeCount.setText(tvSeries.getNumberOfEpisodes() + " Episode");
+            }
+            else {
+                episodeCount.setText(tvSeries.getNumberOfEpisodes() + " Episodes");
+            }
+            synopsis.setText(tvSeries.getOverview());
+            Log.e("imageUrl: ", recentlyAddedPosterUrl);
+            try {
+                Picasso.get().load(recentlyAddedPosterUrl).error(R.mipmap.ic_launcher).into(smallercard_recent);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

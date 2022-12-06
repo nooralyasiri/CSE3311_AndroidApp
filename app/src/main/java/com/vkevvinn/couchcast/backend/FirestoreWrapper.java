@@ -4,17 +4,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class FirestoreWrapper {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    static final String favoritesKey = "favorites";
-    static final String reviewValKey = "reviewVal";
-    static final String favoritedKey = "favorited";
+    public static final String favoritesKey = "favorites";
+    public static final String ratingValKey = "ratingVal";
+    public static final String reviewValKey = "reviewVal";
+    public static final String favoritedKey = "favorited";
 
     public Task<Void> addNewUser(Map<String, Object> userInfo) {
         return db.collection("users")
@@ -29,76 +29,79 @@ public class FirestoreWrapper {
     }
 
     public Task<DocumentSnapshot> addFavorite(String username, Integer showId) {
+        String showString = showId.toString();
+
         return getUserInfo(username).addOnSuccessListener(documentSnapshot -> {
-            Map<Integer, Map<String, String>> currentFavorites = (Map<Integer, Map<String, String>>)documentSnapshot.get("favorites");
-
-            if (currentFavorites == null) {
-                currentFavorites = new HashMap<Integer, Map<String,String>>();
-            }
-
-            if (!currentFavorites.containsKey(showId)) {
-                Map<String, String> favoriteMap = new HashMap<>();
-                favoriteMap.put(favoritedKey, "true");
-                currentFavorites.put(showId, favoriteMap);
-            }
-
-            else {
-                if (currentFavorites.get(showId).containsKey(favoritedKey)) {
-                    currentFavorites.get(showId).replace(favoritedKey, "true");
-                }
-
-                else {
-                    currentFavorites.get(showId).putIfAbsent(favoritedKey, "true");
-                }
-            }
-
-            documentSnapshot.getReference().update(favoritesKey, currentFavorites);
+            documentSnapshot.getReference().update(favoritesKey + "." + showString + "." + favoritedKey, "true");
         });
     }
 
     public Task<DocumentSnapshot> removeFavorite(String username, Integer showId) {
+        String showString = showId.toString();
+
         return getUserInfo(username).addOnSuccessListener(documentSnapshot -> {
-            Map<Integer, Map<String, String>> currentFavorites = (Map<Integer, Map<String, String>>) documentSnapshot.get("favorites");
-            if (currentFavorites != null) {
-                currentFavorites.remove(showId);
-                documentSnapshot.getReference().update(favoritesKey, currentFavorites);
-            }
+            documentSnapshot.getReference().update(favoritesKey + "." + showString + "." + favoritedKey, "false");
         });
     }
 
-    public Task<DocumentSnapshot> addReview(String username, Integer showId, float reviewVal) {
+    public Task<DocumentSnapshot> addRating(String username, Integer showId, float ratingVal) {
+        String showString = showId.toString();
+
         return getUserInfo(username).addOnSuccessListener(documentSnapshot -> {
-            Map<Integer, Map<String, String>> currentFavorites = (Map<Integer, Map<String, String>>) documentSnapshot.get("favorites");
-
-            if (currentFavorites == null) {
-                currentFavorites = new HashMap<Integer, Map<String,String>>();
-            }
-
-            if (currentFavorites.containsKey(showId)) {
-                if (currentFavorites.get(showId).containsKey(reviewValKey)) {
-                    currentFavorites.get(showId).replace(reviewValKey, Float.toString(reviewVal));
-                }
-
-                else {
-                    currentFavorites.get(showId).putIfAbsent(reviewValKey, Float.toString(reviewVal));
-                }
-
-            }
-
-            else {
-                Map<Integer, Map<String, String>> newFavoritesMap = new HashMap<>();
-                Map<String, String> reviewMap = new HashMap<>();
-                reviewMap.put(reviewValKey, Float.toString(reviewVal));
-                newFavoritesMap.put(showId, reviewMap);
-                currentFavorites = newFavoritesMap;
-            }
-
-            documentSnapshot.getReference().update(favoritesKey, currentFavorites);
+            documentSnapshot.getReference().update(favoritesKey + "." + showString + "." + ratingValKey, ratingVal);
         });
     }
 
-    public Map<Integer, Map<String, String>> getFavorites(DocumentSnapshot documentSnapshot) {
-        return (Map<Integer, Map<String, String>>) documentSnapshot.get(favoritesKey);
+    public Task<DocumentSnapshot> addReview(String username, Integer showId, String reviewVal) {
+        String showString = showId.toString();
+
+        return getUserInfo(username).addOnSuccessListener(documentSnapshot -> {
+            documentSnapshot.getReference().update(favoritesKey + "." + showString + "." + reviewValKey, reviewVal);
+        });
+    }
+
+    public List<String> getFavorites(DocumentSnapshot documentSnapshot) {
+        List<String> favoritedList = new ArrayList<>();
+        Map<String, Map<String, String>> favoritesMap = (Map<String, Map<String, String>>) documentSnapshot.get(favoritesKey);
+
+        if (favoritesMap != null) {
+            favoritesMap.keySet().forEach(show -> {
+                if (favoritesMap.get(show).containsKey(favoritedKey) && favoritesMap.get(show).get(favoritedKey).contains("true")) {
+                    favoritedList.add(show);
+                }
+            });
+        }
+
+        return favoritedList;
+    }
+
+    public String getReview(DocumentSnapshot documentSnapshot, int showId) {
+        String showReview = "";
+        String parsedShowId = String.valueOf(showId);
+        Map<String, Map<String, String>> favoritesMap = (Map<String, Map<String, String>>) documentSnapshot.get(favoritesKey);
+
+        if (favoritesMap != null) {
+            if (favoritesMap.containsKey(parsedShowId)) {
+                showReview = favoritesMap.get(parsedShowId).get(reviewValKey);
+            }
+        }
+
+        return showReview;
+    }
+
+    public float getRating(DocumentSnapshot documentSnapshot, int showId) {
+        double showRating = 0;
+        String parsedShowId = String.valueOf(showId);
+
+        Map<String, Map<String, Double>> favoritesMap = (Map<String, Map<String, Double>>) documentSnapshot.get(favoritesKey);
+
+        if (favoritesMap != null) {
+            if (favoritesMap.containsKey(parsedShowId) && favoritesMap.get(parsedShowId).containsKey(ratingValKey)) {
+                showRating = favoritesMap.get(parsedShowId).get(ratingValKey);
+            }
+        }
+
+        return (float)showRating;
     }
 
 }
