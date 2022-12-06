@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.squareup.picasso.Picasso;
@@ -45,6 +47,7 @@ public class ShowViewFragment extends Fragment {
     ImageView showcard;
     RatingBar ratingBar;
     Button deleteEntry, enterReview;
+    ImageButton heartButton;
 
     public ShowViewFragment() {
         // Required empty public constructor
@@ -81,6 +84,7 @@ public class ShowViewFragment extends Fragment {
         deleteEntry = view.findViewById(R.id.deleteEntry);
         showReview = view.findViewById(R.id.review);
         enterReview = view.findViewById(R.id.enterReview);
+        heartButton = view.findViewById(R.id.heartButton);
 
         String userName = ((BotNavActivity) getActivity()).getUserName();
         FirestoreWrapper firestoreWrapper = new FirestoreWrapper();
@@ -96,6 +100,31 @@ public class ShowViewFragment extends Fragment {
             Toast.makeText(ShowViewFragment.this.getContext(), "Something went wrong!  Please try again.", Toast.LENGTH_SHORT).show();
         }
 
+        heartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!heartButton.isSelected()) {
+                    firestoreWrapper.addFavorite(userName, showId).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            heartButton.setSelected(true);
+                            heartButton.setImageResource(R.drawable.hhh);
+                        }
+                    });
+                }
+
+                else {
+                    firestoreWrapper.removeFavorite(userName, showId).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            heartButton.setSelected(false);
+                            heartButton.setImageResource(R.drawable.hhh_off);
+                        }
+                    });
+                }
+            }
+        });
+
         firestoreWrapper.getUserInfo(userName).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -105,6 +134,16 @@ public class ShowViewFragment extends Fragment {
 
                     float showRating = firestoreWrapper.getRating(task.getResult(), showId);
                     ratingBar.setRating(showRating);
+
+                    if (firestoreWrapper.getFavorites(task.getResult()).contains(String.valueOf(showId))) {
+                        heartButton.setSelected(true);
+                        heartButton.setImageResource(R.drawable.hhh);
+                    }
+
+                    else {
+                        heartButton.setSelected(false);
+                        heartButton.setImageResource(R.drawable.hhh_off);
+                    }
                 }
             }
         });
