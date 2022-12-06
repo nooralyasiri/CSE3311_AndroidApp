@@ -75,4 +75,33 @@ public class FirestoreWrapper {
         return favoritedList;
     }
 
+    public String getReview(DocumentSnapshot documentSnapshot, int showId) {
+        String showReview = "";
+        String parsedShowId = String.valueOf(showId);
+        Map<String, Map<String, String>> favoritesMap = (Map<String, Map<String, String>>) documentSnapshot.get(favoritesKey);
+
+        if (favoritesMap != null) {
+            if (favoritesMap.containsKey(parsedShowId)) {
+                showReview = favoritesMap.get(parsedShowId).get(reviewValKey);
+            }
+        }
+
+        return showReview;
+    }
+
+    public float getRating(DocumentSnapshot documentSnapshot, int showId) {
+        double showRating = 0;
+        String parsedShowId = String.valueOf(showId);
+
+        Map<String, Map<String, Double>> favoritesMap = (Map<String, Map<String, Double>>) documentSnapshot.get(favoritesKey);
+
+        if (favoritesMap != null) {
+            if (favoritesMap.containsKey(parsedShowId) && favoritesMap.get(parsedShowId).containsKey(ratingValKey)) {
+                showRating = favoritesMap.get(parsedShowId).get(ratingValKey);
+            }
+        }
+
+        return (float)showRating;
+    }
+
 }

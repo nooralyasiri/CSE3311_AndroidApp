@@ -22,6 +22,8 @@ import com.squareup.picasso.Picasso;
 import com.vkevvinn.couchcast.backend.FirestoreWrapper;
 import com.vkevvinn.couchcast.backend.GetShowWrapper;
 
+import java.util.List;
+
 import info.movito.themoviedbapi.TmdbApi;
 import info.movito.themoviedbapi.Utils;
 import info.movito.themoviedbapi.model.tv.TvSeries;
@@ -93,6 +95,19 @@ public class ShowViewFragment extends Fragment {
         else {
             Toast.makeText(ShowViewFragment.this.getContext(), "Something went wrong!  Please try again.", Toast.LENGTH_SHORT).show();
         }
+
+        firestoreWrapper.getUserInfo(userName).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    String showReviewText = firestoreWrapper.getReview(task.getResult(), showId);
+                    showReview.setText(showReviewText);
+
+                    float showRating = firestoreWrapper.getRating(task.getResult(), showId);
+                    ratingBar.setRating(showRating);
+                }
+            }
+        });
 
         enterReview.setOnClickListener(new View.OnClickListener() {
             @Override
