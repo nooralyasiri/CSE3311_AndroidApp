@@ -233,6 +233,12 @@ public class ShowViewFragment extends Fragment {
                 {
                     seasons.setText(tvSeries.getNumberOfSeasons() + " Seasons");
                 }
+                Log.e("imageUrl: ", posterUrl);
+                try {
+                    Picasso.get().load(posterUrl).error(R.mipmap.ic_launcher).into(showcard);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             catch (Exception e) {

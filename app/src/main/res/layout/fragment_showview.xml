@@ -48,10 +48,12 @@
             android:layout_width="129dp"
             android:layout_height="196dp"
             android:layout_marginTop="65dp"
-            android:layout_marginLeft="25dp"
             android:background="@drawable/tempcard"
+            android:scaleType="centerCrop"
             android:textColor="@color/black"
             android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.15"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/round_corners" />
