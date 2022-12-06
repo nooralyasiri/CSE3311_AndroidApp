@@ -152,9 +152,7 @@ public class ProfileFragment extends Fragment implements ShowlistRecyclerViewAda
 
         @Override
         protected String doInBackground(List<Integer>... showIds) {
-            TmdbApi tmdbApi = new TmdbApi(apiKey);
             GetShowWrapper getShowWrapper = new GetShowWrapper();
-            List<TvSeries> favoriteShows = new ArrayList<TvSeries>();
             try {
                 for (int showId : showIds[0]) {
                     TvSeries tvSeries = getShowWrapper.getTvSeriesById(showId);
