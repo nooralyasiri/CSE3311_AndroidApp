@@ -174,7 +174,24 @@ public class ShowViewFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                showReview.setText(String.valueOf(ratingBar.getRating()));
+                showReview.setText("");
+                ratingBar.setRating(0);
+                firestoreWrapper.addReview(userName, showId, showReview.getText().toString()).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(ShowViewFragment.this.getContext(), "Review successfully removed!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                firestoreWrapper.addRating(userName, showId, ratingBar.getRating()).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(ShowViewFragment.this.getContext(), "Rating successfully removed!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
 
