@@ -148,50 +148,28 @@ public class ProfileFragment extends Fragment implements ShowlistRecyclerViewAda
 //        Toast.makeText(getActivity(), "You clicked " + adapter.getName(position) + " (Show ID " + adapter.getId(position) + ") on item position " + position, Toast.LENGTH_SHORT).show();
     }
 
-    private class PopulateFavoritesList extends AsyncTask<List<Integer>, Void, List<TvSeries>> {
+    private class PopulateFavoritesList extends AsyncTask<List<Integer>, Void, String> {
+
         @Override
-        protected List<TvSeries> doInBackground(List<Integer>... showIds) {
+        protected String doInBackground(List<Integer>... showIds) {
+            TmdbApi tmdbApi = new TmdbApi(apiKey);
             GetShowWrapper getShowWrapper = new GetShowWrapper();
             List<TvSeries> favoriteShows = new ArrayList<TvSeries>();
-            for (int showId : showIds[0]) {
-                favoriteShows.add(getShowWrapper.getTvSeriesById(showId));
-            }
-            return favoriteShows;
-        }
-
-        @Override
-        protected void onPostExecute(List<TvSeries> favoriteShows) {
             try {
-                for(TvSeries tvSeries : favoriteShows) {
-
+                for (int showId : showIds[0]) {
+                    TvSeries tvSeries = getShowWrapper.getTvSeriesById(showId);
                     showNames.add(tvSeries.getName());
-                    String posterPath = tvSeries.getPosterPath();
-                    GetPosterImage getPosterImage = new GetPosterImage();
-                    getPosterImage.execute(posterPath);
+                    String posterUrl = getShowWrapper.getPosterUrl(tvSeries.getId());
+                    posterUrls.add(posterUrl);
                 }
-            }
-
-            catch (Exception e) {
-                Toast.makeText(getActivity(), "Sorry, no popular shows found!", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-    private class GetPosterImage extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... posterPaths) {
-            TmdbApi tmdbApi = new TmdbApi(apiKey);
-            try{
-                return Utils.createImageUrl(tmdbApi, posterPaths[0], "w500").toString();
             } catch (Exception e) {
-                return "https://sdbeerfestival.com/wp-content/uploads/2018/10/placeholder.jpg";
+                Toast.makeText(getActivity(), "Error populating favorites!", Toast.LENGTH_SHORT).show();
             }
+            return null;
         }
 
         @Override
-        protected void onPostExecute(String imageUrl) {
-            Log.e("imageUrl: ", imageUrl.replaceAll("http", "https"));
-            posterUrls.add(imageUrl.replaceAll("http://", "https://"));
+        protected void onPostExecute(String unusedString) {
             adapter.notifyDataSetChanged();
         }
     }

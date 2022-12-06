@@ -48,6 +48,7 @@ public class ShowViewFragment extends Fragment {
     RatingBar ratingBar;
     Button deleteEntry, enterReview;
     ImageButton heartButton;
+    String posterUrl;
 
     public ShowViewFragment() {
         // Required empty public constructor
@@ -203,7 +204,10 @@ public class ShowViewFragment extends Fragment {
         @Override
         protected TvSeries doInBackground(Integer... showId) {
             GetShowWrapper getShowWrapper = new GetShowWrapper();
-            return getShowWrapper.getTvSeriesById(showId[0]);
+
+            TvSeries tvSeries = getShowWrapper.getTvSeriesById(showId[0]);
+            posterUrl = getShowWrapper.getPosterUrl(showId[0]);
+            return tvSeries;
         }
 
         @Override
@@ -212,35 +216,16 @@ public class ShowViewFragment extends Fragment {
 //                    Set UI fields here
                 showTitle.setText(tvSeries.getName());
                 showSummary.setText(tvSeries.getOverview());
-                GetPosterImage getPosterImage = new GetPosterImage();
-                getPosterImage.execute(tvSeries.getPosterPath());
+                Log.e("imageUrl: ", posterUrl);
+                try {
+                    Picasso.get().load(posterUrl).error(R.mipmap.ic_launcher).into(showcard);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             catch (Exception e) {
                 Toast.makeText(ShowViewFragment.this.getContext(), "Sorry, no shows found!", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    private class GetPosterImage extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... posterPaths) {
-            TmdbApi tmdbApi = new TmdbApi(apiKey);
-            try{
-                return Utils.createImageUrl(tmdbApi, posterPaths[0], "w500").toString();
-            } catch (Exception e) {
-                return "https://sdbeerfestival.com/wp-content/uploads/2018/10/placeholder.jpg";
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String imageUrl) {
-            Log.e("imageUrl: ", imageUrl.replaceAll("http", "https"));
-            try {
-                Picasso.get().load(imageUrl.replaceAll("http://", "https://")).error(R.mipmap.ic_launcher).into(showcard);
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }

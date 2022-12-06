@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.vkevvinn.couchcast.backend.GetShowWrapper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -122,53 +124,32 @@ public class SearchFragment extends Fragment implements ShowlistRecyclerViewAdap
 //        Toast.makeText(getActivity(), "You clicked " + adapter.getName(position) + " (Show ID " + adapter.getId(position) + ") on item position " + position, Toast.LENGTH_SHORT).show();
     }
 
-    private class GetShowFromSearchTask extends AsyncTask<String, Void, List<TvSeries>> {
+    private class GetShowFromSearchTask extends AsyncTask<String, Void, String> {
 
         @Override
-        protected List<TvSeries> doInBackground(String... query) {
+        protected String doInBackground(String... query) {
             TmdbApi tmdbApi = new TmdbApi(apiKey);
             List<TvSeries> showQuery = tmdbApi.getSearch().searchTv(query[0],"en",0).getResults();
-            return showQuery;
-        }
-
-        @Override
-        protected void onPostExecute(List<TvSeries> showQuery) {
             try {
                 showNames.clear();
                 showIds.clear();
                 posterUrls.clear();
-                for(TvSeries tvSeries : showQuery) {
-
+                for (TvSeries tvSeries : showQuery) {
                     showNames.add(tvSeries.getName());
                     showIds.add(tvSeries.getId());
-                    String posterPath = tvSeries.getPosterPath();
-                    GetPosterImage getPosterImage = new GetPosterImage();
-                    getPosterImage.execute(posterPath);
+                    GetShowWrapper getShowWrapper = new GetShowWrapper();
+                    String posterUrl = getShowWrapper.getPosterUrl(tvSeries.getId());
+                    posterUrls.add(posterUrl);
                 }
             }
-
             catch (Exception e) {
-                Toast.makeText(getActivity(), "Sorry, no popular shows found!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Sorry, no shows found!", Toast.LENGTH_SHORT).show();
             }
-        }
-    }
-
-    private class GetPosterImage extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... posterPaths) {
-            TmdbApi tmdbApi = new TmdbApi(apiKey);
-            try{
-                return Utils.createImageUrl(tmdbApi, posterPaths[0], "w500").toString();
-            } catch (Exception e) {
-                return "https://sdbeerfestival.com/wp-content/uploads/2018/10/placeholder.jpg";
-            }
+            return null;
         }
 
         @Override
-        protected void onPostExecute(String imageUrl) {
-            Log.e("imageUrl: ", imageUrl.replaceAll("http", "https"));
-            posterUrls.add(imageUrl.replaceAll("http://", "https://"));
+        protected void onPostExecute(String unusedString) {
             adapter.notifyDataSetChanged();
         }
     }
