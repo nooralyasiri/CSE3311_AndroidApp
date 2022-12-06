@@ -2,11 +2,14 @@ package com.vkevvinn.couchcast;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -28,6 +31,7 @@ import java.util.List;
 
 import info.movito.themoviedbapi.TmdbApi;
 import info.movito.themoviedbapi.Utils;
+import info.movito.themoviedbapi.model.Genre;
 import info.movito.themoviedbapi.model.tv.TvSeries;
 
 public class ShowViewFragment extends Fragment {
@@ -42,11 +46,12 @@ public class ShowViewFragment extends Fragment {
     private TextView username_display;
     private TextView realname_display;
 
-    TextView showTitle, showSummary, showReview;
+    TextView showTitle, showSummary, seasons, genre;
     String apiKey = "4bb376189becc0b82f734fd11af958a0";
     ImageView showcard;
     RatingBar ratingBar;
     Button deleteEntry, enterReview;
+    EditText showReview;
     ImageButton heartButton;
     String posterUrl;
 
@@ -79,8 +84,11 @@ public class ShowViewFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_showview, container, false);
 
         showTitle = view.findViewById(R.id.showTitle);
-        showSummary = view.findViewById(R.id.showSummary);
+        seasons = view.findViewById(R.id.seasons);
+        genre = view.findViewById(R.id.genre);
         showcard = view.findViewById(R.id.showcard);
+        showSummary = view.findViewById(R.id.showSummary);
+        showSummary.setMovementMethod(new ScrollingMovementMethod());
         ratingBar = view.findViewById(R.id.ratingBar);
         deleteEntry = view.findViewById(R.id.deleteEntry);
         showReview = view.findViewById(R.id.review);
@@ -200,7 +208,7 @@ public class ShowViewFragment extends Fragment {
     }
 
     private class GetShowAsyncTask extends AsyncTask<Integer, Void, TvSeries> {
-
+        String genreList = " ";
         @Override
         protected TvSeries doInBackground(Integer... showId) {
             GetShowWrapper getShowWrapper = new GetShowWrapper();
@@ -216,11 +224,14 @@ public class ShowViewFragment extends Fragment {
 //                    Set UI fields here
                 showTitle.setText(tvSeries.getName());
                 showSummary.setText(tvSeries.getOverview());
-                Log.e("imageUrl: ", posterUrl);
-                try {
-                    Picasso.get().load(posterUrl).error(R.mipmap.ic_launcher).into(showcard);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                genre.setText(tvSeries.getGenres().get(0).getName());
+                if (tvSeries.getNumberOfSeasons() == 1)
+                {
+                    seasons.setText(tvSeries.getNumberOfSeasons() + " Season");
+                }
+                else
+                {
+                    seasons.setText(tvSeries.getNumberOfSeasons() + " Seasons");
                 }
             }
 
