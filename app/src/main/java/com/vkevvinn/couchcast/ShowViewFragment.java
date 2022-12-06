@@ -46,7 +46,7 @@ public class ShowViewFragment extends Fragment {
     private TextView username_display;
     private TextView realname_display;
 
-    TextView showTitle, showSummary, seasons, genre;
+    TextView showTitle, showSummary, seasons, genre, episodes;
     String apiKey = "4bb376189becc0b82f734fd11af958a0";
     ImageView showcard;
     RatingBar ratingBar;
@@ -94,6 +94,7 @@ public class ShowViewFragment extends Fragment {
         showReview = view.findViewById(R.id.review);
         enterReview = view.findViewById(R.id.enterReview);
         heartButton = view.findViewById(R.id.heartButton);
+        episodes = view.findViewById(R.id.episodes);
 
         String userName = ((BotNavActivity) getActivity()).getUserName();
         FirestoreWrapper firestoreWrapper = new FirestoreWrapper();
@@ -227,11 +228,19 @@ public class ShowViewFragment extends Fragment {
                 genre.setText(tvSeries.getGenres().get(0).getName());
                 if (tvSeries.getNumberOfSeasons() == 1)
                 {
-                    seasons.setText(tvSeries.getNumberOfSeasons() + " Season");
+                    seasons.setText(tvSeries.getNumberOfSeasons() + " Season, ");
                 }
                 else
                 {
-                    seasons.setText(tvSeries.getNumberOfSeasons() + " Seasons");
+                    seasons.setText(tvSeries.getNumberOfSeasons() + " Seasons, ");
+                }
+                if (tvSeries.getNumberOfEpisodes() == 1)
+                {
+                    episodes.setText(tvSeries.getNumberOfEpisodes() + " Episode");
+                }
+                else
+                {
+                    episodes.setText(tvSeries.getNumberOfEpisodes() + " Episodes");
                 }
                 Log.e("imageUrl: ", posterUrl);
                 try {
