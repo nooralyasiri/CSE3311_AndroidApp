@@ -1,9 +1,13 @@
 package com.vkevvinn.couchcast;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,11 +16,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.vkevvinn.couchcast.backend.FirestoreWrapper;
 import com.vkevvinn.couchcast.backend.GetShowWrapper;
@@ -28,6 +35,8 @@ import java.util.Map;
 import info.movito.themoviedbapi.TmdbApi;
 import info.movito.themoviedbapi.Utils;
 import info.movito.themoviedbapi.model.tv.TvSeries;
+
+import java.io.File;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,6 +63,11 @@ public class ProfileFragment extends Fragment implements ShowlistRecyclerViewAda
 
     private TextView username_display;
     private TextView realname_display;
+
+    private ImageView profilePic_display;
+    private FloatingActionButton changePic;
+
+    private FirestoreWrapper firestoreWrapper = new FirestoreWrapper();
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -94,6 +108,21 @@ public class ProfileFragment extends Fragment implements ShowlistRecyclerViewAda
         username_display = view.findViewById(R.id.profile_username_display);
         realname_display = view.findViewById(R.id.profile_realname_display);
 
+        //variable declarations to change picture
+        profilePic_display = view.findViewById(R.id.profilePic);
+        changePic = view.findViewById(R.id.changePic);
+
+        //on click listener that actually does the change when button is pressed
+        changePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImagePicker.with(ProfileFragment.this)
+                        .cropSquare()	    			//Crop image(Optional), Check Customization for more option
+                        .compress(1024)			//Final image size will be less than 1 MB(Optional)
+                        .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+                        .start();
+            }
+        });
         String userName = ((BotNavActivity) getActivity()).getUserName();
         FirestoreWrapper firestoreWrapper = new FirestoreWrapper();
         firestoreWrapper.getUserInfo(userName).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -116,6 +145,13 @@ public class ProfileFragment extends Fragment implements ShowlistRecyclerViewAda
                 if (task.isSuccessful()) {
                     if( task.getResult().exists() ) {
                         DocumentSnapshot docSnapshot = task.getResult();
+                        if( docSnapshot.contains("profilePicUri") && !docSnapshot.get("profilePicUri").toString().isEmpty() ) {
+                            Uri imageUri = Uri.parse(docSnapshot.get("profilePicUri").toString());
+                            File file = new File(imageUri.getPath());
+                            if( file.exists() ) {
+                                profilePic_display.setImageURI(Uri.parse(docSnapshot.get("profilePicUri").toString()));
+                            }
+                        }
                         String prettyUsername = "@"+docSnapshot.get("userName").toString();
                         username_display.setText(prettyUsername);
 
@@ -170,5 +206,32 @@ public class ProfileFragment extends Fragment implements ShowlistRecyclerViewAda
         protected void onPostExecute(String unusedString) {
             adapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Uri uri = data.getData();
+        profilePic_display.setImageURI(uri);
+
+        String userName = ((BotNavActivity) getActivity()).getUserName();
+        firestoreWrapper.getUserInfo(userName).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    if( task.getResult().exists() ) {
+                        DocumentSnapshot docSnapshot = task.getResult();
+                        firestoreWrapper.addProfilePic(docSnapshot, uri.toString()).addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                            }
+                        });
+                    }
+                }
+            }
+        });
+
     }
 }

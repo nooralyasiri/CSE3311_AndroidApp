@@ -104,4 +104,8 @@ public class FirestoreWrapper {
         return (float)showRating;
     }
 
+    public Task<DocumentSnapshot> addProfilePic(DocumentSnapshot documentSnapshot, String uri) {
+        documentSnapshot.getReference().update("profilePicUri", uri);
+        return documentSnapshot.getReference().get();
+    }
 }
