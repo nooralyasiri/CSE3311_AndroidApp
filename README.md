@@ -31,8 +31,8 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
+    <li><a href="#installation">Installation</a></li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#developers">Developers</a></li>
   </ol>
 </details>
@@ -41,55 +41,39 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-! -- ADD PROJECT DESCRIPTION 
+Similar to Spotify, our app CouchCast is a user-driven platform that allows users to search the database for a wide selection of TV shows of different genres for them to watch with ease. Users are able to type and search, rate the show, as well as review the show due to their own interest, and gives a chance for other viewers to read the ratings as well.
 
 
 
 ### Built With
 
 <!-- * [![JQuery][JQuery.com]][JQuery-url]-->
-* <a href="https://flyclipart.com/java-logos-download-java-logo-png-892734" title="Java Logos Download - Java Logo PNG"><img src="https://flyclipart.com/thumb2/java-logos-download-892734.png" width="50" /></a>
+* <a href="https://flyclipart.com/java-logos-download-java-logo-png-892734" title="Java Logos Download - Java Logo PNG"><img src="https://flyclipart.com/thumb2/java-logos-download-892734.png" width="50" /></a> Java
 <!-- * [![Java][java.com]][Java-url] -->
 <!-- * * [![Android Studio][java.com]][androidStudio-url]-->
-* <a href="https://flyclipart.com/android-studio-icon-android-icon-png-502596" title="Android Studio Icon - Android Icon PNG"><img src="https://flyclipart.com/thumb2/android-studio-icon-502596.png" width="45" /></a>
+* <a href="https://flyclipart.com/android-studio-icon-android-icon-png-502596" title="Android Studio Icon - Android Icon PNG"><img src="https://flyclipart.com/thumb2/android-studio-icon-502596.png" width="45" /></a> Android Studio
 
 
 
 
 <!-- GETTING STARTED -->
 
-<!-- ### Installation
+## Installation
 
-<!--1. Get a free API Key at [https://example.com](https://example.com)
+1. Get a free API Key at [https://example.com](https://example.com)
 2. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/nooralyasiri/CSE3311_AndroidApp.git
    ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+3. Enter your API key for all instances of apiKey in the codebase
+4. Build and Compile your code via Android Studio
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
--->
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-!-- VIA THE TEMPLATE <br>
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-<!-- _For more examples, please refer to the [Documentation](https://example.com)_ -->
 
 
 
 <!-- ROADMAP -->
-## Roadmap
+## Usage
 
 - [ ] Authentication
   - [ ] Login
@@ -102,8 +86,6 @@ Use this space to show useful examples of how a project can be used. Additional 
 - [ ] Add TV Shows to a List (Favorites, Want to Watch)
 - [ ] Rate and Review TV Shows
 - [ ] Customize your Profile
-- [ ] Dark Mode/Light Mode
-
 
 
 
@@ -153,5 +135,4 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 <!-- [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com -->
 <!-- [java.com]: <a href="https://flyclipart.com/java-logos-download-java-logo-png-892734" title="Java Logos Download - Java Logo PNG"><img src="https://flyclipart.com/thumb2/java-logos-download-892734.png" width="350" /></a>
-[Java-url]:https://www.java.com/en/ --> 
-
+[Java-url]:https://www.java.com/en/ -->
