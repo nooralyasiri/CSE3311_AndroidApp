@@ -7,7 +7,7 @@ import info.movito.themoviedbapi.model.tv.TvSeries;
 
 public class GetShowWrapper {
 
-    String apiKey = "4bb376189becc0b82f734fd11af958a0";
+    String apiKey = "";
 
     public TvSeries getTvSeriesByName(String... showNames) {
         TmdbApi tmdbApi = new TmdbApi(apiKey);

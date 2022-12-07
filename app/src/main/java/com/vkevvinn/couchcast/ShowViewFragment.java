@@ -47,7 +47,7 @@ public class ShowViewFragment extends Fragment {
     private TextView realname_display;
 
     TextView showTitle, showSummary, seasons, genre, episodes;
-    String apiKey = "4bb376189becc0b82f734fd11af958a0";
+    String apiKey = "";
     ImageView showcard;
     RatingBar ratingBar;
     Button deleteEntry, enterReview;

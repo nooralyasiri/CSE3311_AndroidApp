@@ -56,7 +56,7 @@ public class ProfileFragment extends Fragment implements ShowlistRecyclerViewAda
 
     RecyclerView favorites_rv;
     private ShowlistRecyclerViewAdapter adapter;
-    String apiKey = "4bb376189becc0b82f734fd11af958a0";
+    String apiKey = "";
     private ArrayList<Integer> showIds = new ArrayList<>();
     private ArrayList<String> showNames = new ArrayList<>();
     private ArrayList<String> posterUrls = new ArrayList<>();
