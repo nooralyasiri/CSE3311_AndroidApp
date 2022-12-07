@@ -60,13 +60,13 @@ Similar to Spotify, our app CouchCast is a user-driven platform that allows user
 
 ## Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
+1. Get a free API Key at [The Movie Database API](https://developers.themoviedb.org/3/getting-started/introduction).
 2. Clone the repo
    ```sh
    git clone https://github.com/nooralyasiri/CSE3311_AndroidApp.git
    ```
 3. Enter your API key for all instances of apiKey in the codebase
-4. Build and Compile your code via Android Studio
+4. Build and Compile the code via Android Studio
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
