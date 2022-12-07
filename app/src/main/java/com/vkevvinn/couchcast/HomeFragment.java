@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment implements ShowlistRecyclerViewAdapte
 
     RecyclerView trending_rv;
     private ShowlistRecyclerViewAdapter adapter;
-    String apiKey = "4bb376189becc0b82f734fd11af958a0";
+    String apiKey = "";
     private List<TvSeries> trendingShows;
     private ArrayList<Integer> showIds = new ArrayList<>();
     private ArrayList<String> showNames = new ArrayList<>();

@@ -43,7 +43,7 @@ public class SearchFragment extends Fragment implements ShowlistRecyclerViewAdap
 
     RecyclerView search_rv;
     private ShowlistRecyclerViewAdapter adapter;
-    String apiKey = "4bb376189becc0b82f734fd11af958a0";
+    String apiKey = "";
     private ArrayList<Integer> showIds = new ArrayList<>();
     private ArrayList<String> showNames = new ArrayList<>();
     private ArrayList<String> posterUrls = new ArrayList<>();
