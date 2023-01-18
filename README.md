@@ -11,12 +11,7 @@
 
 <h3 align="center">CouchCast</h3>
 
-  <p align="center">
-    short project_description
-    <br />
- 
-  
-  </p>
+
 </div>
 
 
